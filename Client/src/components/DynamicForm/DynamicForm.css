@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "Euclid Square";
+  src: url("../../assets/Fonts/EuclidSquare-Regular.woff2") format("woff2"),
+    url("../../assets/Fonts/EuclidSquare-Regular.woff") format("woff"),
+    url("../../assets/Fonts/EuclidSquare-Regular.ttf") format("truetype"),
+    url("../../assets/Fonts/EuclidSquare-Bold.woff2") format("woff2"),
+    url("../../assets/Fonts/EuclidSquare-SemiBold.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/* Additional @font-face rules for different font weights if available */
+
+.dynamic-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: rgba(23, 24, 35, 0.75);
+  font-family: "Euclid Square", sans-serif;
+  width: 100%;
+  /* text-align: left; */
+}
+
+.input-group {
+  display: flex;
+  padding: 2px;
+  align-items: center;
+  width: 100%;
+padding-left: 2px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: "Euclid Square", sans-serif;
+  color: rgba(23, 24, 35, 0.75);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.form-button {
+  font-family: "Euclid Square", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-top: 20px;
+  background-color: #3e6ef4;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form-button:hover {
+  background-color: #2d54eb;
+}
+
+.terms-checkboxX {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: "Euclid Square", sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(23, 24, 35, 0.85);
+}
+.terms-checkboxX a {
+  text-decoration: none;
+  color: rgba(46, 84, 234, 0.8);
+}
+.error-message {
+  font-family: "Euclid Square", sans-serif;
+  color: red;
+  font-weight: 400; /* Assuming error messages use the regular weight */
+  font-size: 14px; /* Adjust if you have a specific size for error messages */
+  line-height: 20px; /* Adjust if you have a specific line height for error messages */
+}

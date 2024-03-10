@@ -1,0 +1,16 @@
+<svg width="300" height="120" xmlns="http://www.w3.org/2000/svg">
+    <!-- Define the colors -->
+    <defs>
+        <style>
+            .purple { fill: #6a0dad; } /* A cool shade of purple for "SAFE" and "T" */
+            .gold { fill: #ffd700; } /* Gold color for "Y" */
+        </style>
+    </defs>
+    
+    <!-- Text content with adjusted spacing -->
+    <text x="10" y="70" font-family="Verdana" font-size="48" font-weight="bold" class="purple">SAFE</text>
+    <text x="140" y="70" font-family="Verdana" font-size="48" font-weight="bold" class="purple">T</text>
+    <text x="180" y="70" font-family="Verdana" font-size="48" font-weight="bold" class="gold">Y</text>
+
+ 
+</svg>

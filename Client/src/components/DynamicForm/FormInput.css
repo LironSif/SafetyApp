@@ -1,0 +1,44 @@
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .input {
+    width: calc(100% - 50px); /* Adjust based on the size of the toggle button, ensuring no overlap */
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem; /* Example font size, adjust as necessary */
+  }
+  
+  .input.error {
+    border-color: #D8000C; /* Highlight the input with an error */
+  }
+  
+  .error-message {
+    color: #D8000C;
+    font-size: 0.875rem; /* Adjust as necessary */
+    margin-top: 4px;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 12px; 
+    top: 60%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .toggle-password img {
+    height: 24px; /* Adjust as necessary */
+    width: 24px; /* Adjust to maintain aspect ratio */
+  }
+  .form-input-group{
+    width: 100%;
+  }
+  

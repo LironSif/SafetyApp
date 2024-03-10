@@ -1,0 +1,52 @@
+.home {
+  display: flex;
+}
+
+.sidebar {
+  width: 250px; /* Adjust width as needed */
+  background-color: #f0f0f0; /* Sidebar background color */
+  padding: 20px;
+}
+
+.user-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: "Euclid Square", sans-serif; /* Ensure you load Euclid Square font */
+
+}
+
+.avatar {
+  /* Style your avatar here */
+  width: 24px;
+  height: 24px;
+  background-color: #ccc; /* Placeholder color, use an img tag or background-image */
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 5px;
+}
+
+.username {
+  margin-bottom: 10px;
+}
+
+.options-button {
+  cursor: pointer;
+}
+
+.navigation-section .email {
+  margin-bottom: 20px;
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* Add more styles as needed */

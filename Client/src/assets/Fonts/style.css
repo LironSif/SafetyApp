@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Euclid Square';
+    src: local('Euclid Square Regular'), local('Euclid-Square-Regular'),
+        url('EuclidSquare-Regular.woff2') format('woff2'),
+        url('EuclidSquare-Regular.woff') format('woff'),
+        url('EuclidSquare-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
