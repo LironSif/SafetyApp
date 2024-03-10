@@ -6,7 +6,7 @@ import AuthOptions from "../../components/AuthButtons/AuthOptions.jsx";
 import DynamicForm from "../../components/DynamicForm/DynamicForm.jsx";
 import { signupFormConfig } from "../../Utils/FormConfig.js";
 import { useSignupUserMutation } from "../../services/userApi.js";
-import { validateSignupForm } from "../../components/Utils/Formvalidation.js";
+import { validateSignupForm } from "../../Utils/Formvalidation.js";
 
 const SignUp = () => {
   const navigate = useNavigate();
