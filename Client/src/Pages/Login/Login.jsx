@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./login.css"; // Ensure this path is correct
-import logo from "../../assets/logo/Logo.svg"; // Adjust the path as necessary
+import "./login.css"; 
+import logo from "../../assets/logo/Logo.svg"; 
 import { useLoginUserMutation } from "../../services/userApi.js";
-import AuthOptions from "../../components/AuthButtons/AuthOptions.jsx"; // Adjust the path as necessary
-import DynamicForm from "../../components/DynamicForm/DynamicForm.jsx"; // Adjust the path as necessary
-import { validateLoginForm } from "../../Utils/Formvalidation.js"; // Adjust the path as necessary
-import { loginFormConfig } from "../../Utils/FormConfig.js"; // Adjust the path as necessary
+import AuthOptions from "../../components/AuthButtons/AuthOptions.jsx"; 
+import DynamicForm from "../../components/DynamicForm/DynamicForm.jsx"; 
+import { validateLoginForm } from "../../Utils/Formvalidation.js"; 
+import { loginFormConfig } from "../../Utils/FormConfig.js"; 
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const LoginForm = () => {
 
   const handleFormSubmit = async (formData) => {
     const { isValid, errors } = validateLoginForm(formData);
-    setFormErrors(errors); // Update form errors state
+    setFormErrors(errors); 
 
     if (!isValid) return;
 

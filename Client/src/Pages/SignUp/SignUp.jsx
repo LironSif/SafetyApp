@@ -4,7 +4,7 @@ import "../Login/login.css"
 import logo from "../../assets/logo/Logo.svg";
 import AuthOptions from "../../components/AuthButtons/AuthOptions.jsx";
 import DynamicForm from "../../components/DynamicForm/DynamicForm.jsx";
-import { signupFormConfig } from "../../components/Utils/FormConfig.js";
+import { signupFormConfig } from "../../Utils/FormConfig.js";
 import { useSignupUserMutation } from "../../services/userApi.js";
 import { validateSignupForm } from "../../components/Utils/Formvalidation.js";
 
