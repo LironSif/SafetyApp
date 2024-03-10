@@ -18,7 +18,32 @@ dotenv.config();
 
 // Create the Express application
 const app = express();
-const PORT = process.env.PORT || 3000; // Server port, fallback to 3000 if not specified in .env
+const PORT = process.env.SERVER_PORT || 5000; // Server port, fallback to 3000 if not specified in .env
+const NODE_ENV = process.env.NODE_ENV;
+const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
+const CLIENT_PORT = process.env.CLIENT_PORT;
+
+
+const allowedOrigins = [
+  `${BASE_SERVER_URL}:${CLIENT_PORT}`,
+  "https://safetyapp2.netlify.app",
+];
+
+app.set("trust proxy", 1);
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Invalid origin"));
+    }
+  },
+  credentials: true, // This is important for cookies, authorization headers with HTTPS
+};
+
+// CORS middleware configuration to allow requests from specified front-end domain
+app.use(cors(corsOptions));
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -27,24 +52,23 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configure session middleware with cookie settings, using secret from .env for encryption
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false, // Do not force session save if unmodified
-  saveUninitialized: true, // Save uninitialized sessions to store
-  cookie: { secure: false, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 } // Cookie configuration
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECERT,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === "production" ? true : "auto",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : true,
+    },
+  })
+);
 
 // Initialize Passport and session middleware for authentication
 app.use(passport.initialize());
 app.use(passport.session());
-app.set("trust proxy", 1);
-// CORS middleware configuration to allow requests from specified front-end domain
-app.use(cors({
-    // origin: "http://localhost:5173", // Adjust this to match your front-end URL for development
-    origin: "https://safetyapp2.netlify.app", // Adjust this to match your front-end URL for development
-    methods: "GET,POST,PUT,DELETE", // Allowed HTTP methods
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-}));
+
+
 
 // Public routes
 // Authentication routes (login with Google, GitHub, Facebook, etc.)

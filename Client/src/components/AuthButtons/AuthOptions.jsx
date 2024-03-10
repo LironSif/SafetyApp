@@ -2,16 +2,17 @@ import React from 'react';
 import GoogleLogo from '../../assets/Login/Google-logo.svg';
 import FacebookIcon from '../../assets/Login/Facebook_icon.svg';
 import './AuthOptions.css';
+import { serverApiUrl } from '../../Constants/urls.js'
 
 const socialOptions = [
-  // { name: 'Google', logo: GoogleLogo, authUrl: `${import.meta.env.VITE_SERVER_URL}/auth/google` },
-  { name: 'Google', logo: GoogleLogo, authUrl: `${import.meta.env.VITE_SERVER_DEPLOY_URL}/auth/google` },
-  // { name: 'Facebook', logo: FacebookIcon, authUrl: `${import.meta.env.VITE_SERVER_URL}/auth/facebook` },
-  { name: 'Facebook', logo: FacebookIcon, authUrl: `${import.meta.env.VITE_SERVER_DEPLOY_URL}/auth/facebook` },
+  { name: 'Google', logo: GoogleLogo, authUrl: `/auth/google` },
+  { name: 'Facebook', logo: FacebookIcon, authUrl: `/auth/facebook` },
   // Add more social options here as needed
 ];
 
 const AuthOptions = () => {
+  const fullServerUrl = serverApiUrl; // Ensure this is correctly importing the server URL
+
   return (
     <section className="auth-options">
       <div className="divider">
@@ -24,7 +25,7 @@ const AuthOptions = () => {
           <button
             key={option.name}
             className="btn"
-            onClick={() => (window.location.href = option.authUrl)}
+            onClick={() => (window.location.href = `${fullServerUrl}${option.authUrl}`)}
           >
             <img src={option.logo} alt={option.name} className="icon" />
             <span className="btn-text">Sign in with {option.name}</span>

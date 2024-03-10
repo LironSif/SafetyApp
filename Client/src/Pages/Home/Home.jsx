@@ -21,7 +21,7 @@ console.log(user)
         </div>
         <div className='navigation-section'>
           {/* It's not clear why you have a hardcoded email here. Consider dynamic content or remove it if not needed */}
-          <div className='email'>lironsifado@gmail.com</div>
+          <div className='email'>d</div>
           <ul className='nav-list'>
             <li>Getting Started</li>
             <li>Setup & Installation</li>
