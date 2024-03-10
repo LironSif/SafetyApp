@@ -4,10 +4,10 @@ import FacebookIcon from '../../assets/Login/Facebook_icon.svg';
 import './AuthOptions.css';
 
 const socialOptions = [
-  { name: 'Google', logo: GoogleLogo, authUrl: "/auth/google" },
   // { name: 'Google', logo: GoogleLogo, authUrl: `${import.meta.env.VITE_SERVER_URL}/auth/google` },
-  { name: 'Facebook', logo: FacebookIcon, authUrl: `${import.meta.env.VITE_SERVER_DEPLOY_URL}/auth/facebook` },
+  { name: 'Google', logo: GoogleLogo, authUrl: `/auth/google` },
   // { name: 'Facebook', logo: FacebookIcon, authUrl: `${import.meta.env.VITE_SERVER_URL}/auth/facebook` },
+  { name: 'Facebook', logo: FacebookIcon, authUrl: `/auth/facebook` },
   // Add more social options here as needed
 ];
 
@@ -24,7 +24,7 @@ const AuthOptions = () => {
           <button
             key={option.name}
             className="btn"
-            onClick={() => (window.location.href = option.authUrl + "xssss")}
+            onClick={() => (window.location.href = option.authUrl)}
           >
             <img src={option.logo} alt={option.name} className="icon" />
             <span className="btn-text">Sign in with {option.name}</span>
