@@ -37,7 +37,7 @@ app.use(session({
 // Initialize Passport and session middleware for authentication
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.set("trust proxy", 1);
 // CORS middleware configuration to allow requests from specified front-end domain
 app.use(cors({
     // origin: "http://localhost:5173", // Adjust this to match your front-end URL for development
