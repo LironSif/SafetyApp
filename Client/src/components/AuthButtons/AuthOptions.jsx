@@ -24,7 +24,7 @@ const AuthOptions = () => {
           <button
             key={option.name}
             className="btn"
-            onClick={() => (window.location.href = option.authUrl)}
+            onClick={() => (window.location.href = option.authUrl + "xssss")}
           >
             <img src={option.logo} alt={option.name} className="icon" />
             <span className="btn-text">Sign in with {option.name}</span>
