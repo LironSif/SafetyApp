@@ -40,7 +40,8 @@ app.use(passport.session());
 
 // CORS middleware configuration to allow requests from specified front-end domain
 app.use(cors({
-    origin: "http://localhost:5173", // Adjust this to match your front-end URL for development
+    // origin: "http://localhost:5173", // Adjust this to match your front-end URL for development
+    origin: "https://safetyapp2.netlify.app", // Adjust this to match your front-end URL for development
     methods: "GET,POST,PUT,DELETE", // Allowed HTTP methods
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }));
