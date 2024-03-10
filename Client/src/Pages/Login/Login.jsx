@@ -5,8 +5,8 @@ import logo from "../../assets/logo/Logo.svg"; // Adjust the path as necessary
 import { useLoginUserMutation } from "../../services/userApi.js";
 import AuthOptions from "../../components/AuthButtons/AuthOptions.jsx"; // Adjust the path as necessary
 import DynamicForm from "../../components/DynamicForm/DynamicForm.jsx"; // Adjust the path as necessary
-import { validateLoginForm } from "../../components/Utils/Formvalidation.js"; // Adjust the path as necessary
-import { loginFormConfig } from "../../components/Utils/FormConfig.js"; // Adjust the path as necessary
+import { validateLoginForm } from "../../Utils/Formvalidation.js"; // Adjust the path as necessary
+import { loginFormConfig } from "../../Utils/FormConfig.js"; // Adjust the path as necessary
 
 const LoginForm = () => {
   const navigate = useNavigate();
