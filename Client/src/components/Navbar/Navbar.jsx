@@ -4,7 +4,7 @@ import { NavbarContainer, Logo, List, ListItem, Avatar, StyledLink } from './Nav
 
 const Navbar = ({ user }) => {
   const logout = () => {
-    window.open(`${VITE_SERVER_DEPLOY_URL}/auth/logout`, "_self");
+    window.open(`${import.meta.VITE_SERVER_DEPLOY_URL}/auth/logout, "_self"`);
   };
 
   return (
