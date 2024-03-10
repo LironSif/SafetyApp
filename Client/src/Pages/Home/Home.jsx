@@ -4,7 +4,7 @@ import { useCheckAuthStatusQuery } from "../../services/userApi";
 
 const Home = () => {
   const { data: user, isLoading } = useCheckAuthStatusQuery();
-console.log(data)
+console.log(user)
   if (isLoading) {
     return <div>Loading...</div>; // Display a loading indicator or message
   }
