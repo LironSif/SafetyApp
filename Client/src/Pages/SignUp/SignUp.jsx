@@ -35,7 +35,7 @@ const SignUp = () => {
 
     try {
       await signupUser(formData).unwrap();
-      navigate("/dashboard");
+      navigate("/");
     } catch (signupError) {
       console.error(signupError);
     }

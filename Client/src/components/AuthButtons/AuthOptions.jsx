@@ -11,7 +11,7 @@ const socialOptions = [
 ];
 
 const AuthOptions = () => {
-  const fullServerUrl = serverApiUrl; // Ensure this is correctly importing the server URL
+  const fullServerUrl = serverApiUrl; 
 
   return (
     <section className="auth-options">

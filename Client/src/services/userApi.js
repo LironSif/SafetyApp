@@ -5,7 +5,7 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${serverApiUrl}/auth`,
-    credentials: 'include', // Correct way to set credentials for cross-origin requests
+    credentials: 'include',
   }),
   endpoints: (builder) => ({
     signupUser: builder.mutation({
@@ -27,8 +27,9 @@ export const userApi = createApi({
     logoutUser: builder.mutation({
       query: () => ({
         url: 'logout',
-        method: 'GET',
+        method: 'PUT',
       }),
+      invalidatesTags: ['Auth'],
     }),
     checkAuthStatus: builder.query({
       query: () => 'login/success',

@@ -2,6 +2,9 @@ import bcrypt from 'bcryptjs';
 import passport from 'passport';
 import User from '../models/User.js';
 import fetch from 'node-fetch'; // Ensure you have 'node-fetch' installed
+import { clientUrl } from "../utils/url.js";
+
+const FULL_SERVER_URL = clientUrl;
 
 // Helper function to verify reCAPTCHA token
 async function verifyRecaptcha(token) {
@@ -20,47 +23,12 @@ async function verifyRecaptcha(token) {
   }
 }
 
-export const signupUser = async (req, res) => {
 
-  const { email, password, name, recaptchaToken } = req.body;
 
-  // First, verify the reCAPTCHA token
-  const isHuman = await verifyRecaptcha(recaptchaToken);
-  if (!isHuman) {
-    return res.status(400).json({ message: 'Failed reCAPTCHA verification. Are you a robot?' });
-  }
 
-  // Proceed with the original signup logic if reCAPTCHA verification is successful
-  if (!email || !password || !name) {
-    return res.status(400).json({ message: 'All fields are required.' });
-  }
-
-  try {
-    const existingUser = await User.findOne({ email: email.toLowerCase() });
-    if (existingUser) {
-      return res.status(409).json({ message: 'Email is already in use.' });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    const user = new User({
-      email: email.toLowerCase(),
-      password: hashedPassword,
-      name,
-    });
-    await user.save();
-
-    req.logIn(user, (err) => {
-
-      if (err) return res.status(500).json({ message: 'Error logging in user.' });
-      res.status(201).json({ message: 'Signup and login successful.', user: user.toObject({ getters: true, virtuals: false }) });
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Error signing up user.', error: error.toString() });
-  }
-};
 
 export const loginUser = (req, res, next) => {
+
 
   passport.authenticate('local', (err, user, info) => {
 
@@ -76,17 +44,71 @@ export const loginUser = (req, res, next) => {
 };
 
 
+export const signupUser = async (req, res) => {
+  const { email, password, name, recaptchaToken } = req.body;
+
+  // First, verify the reCAPTCHA token
+  const isHuman = await verifyRecaptcha(recaptchaToken);
+  if (!isHuman) {
+    return res.status(400).json({ message: 'Failed reCAPTCHA verification. Are you a robot?' });
+  }
+
+  if (!email || !password || !name) {
+    return res.status(400).json({ message: 'All fields are required.' });
+  }
+
+  try {
+    const existingUser = await User.findOne({ email: email.toLowerCase() });
+
+    if (existingUser && existingUser.password) {
+      // The user exists and has a password already set
+      return res.status(409).json({ message: 'Email is already in use.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    if (existingUser && !existingUser.password) {
+      // The user exists but doesn't have a password (signed up via social login)
+      existingUser.password = hashedPassword;
+      await existingUser.save();
+
+      // Log the user in automatically after setting the password
+      req.logIn(existingUser, (err) => {
+        if (err) return res.status(500).json({ message: 'Error logging in user.' });
+        return res.status(200).json({ message: 'Password set and login successful.', user: existingUser.toObject({ getters: true, virtuals: false }) });
+      });
+    } else {
+      // No existing user, create a new user
+      const newUser = new User({
+        email: email.toLowerCase(),
+        password: hashedPassword,
+        name,
+      });
+      await newUser.save();
+
+      // Log the new user in automatically after signup
+      req.logIn(newUser, (err) => {
+        if (err) return res.status(500).json({ message: 'Error logging in user.' });
+        return res.status(201).json({ message: 'Signup and login successful.', user: newUser.toObject({ getters: true, virtuals: false }) });
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error signing up user.', error: error.toString() });
+  }
+};
+
 export const logoutUser = (req, res) => {
+
   req.session.destroy((err) => { // Destroys session data on the server
     if (err) {
       return res.status(500).json({ message: 'Error logging out.' });
     }
     res.clearCookie('connect.sid'); // Clears the session cookie from the client
-    // 'connect.sid' is the default session cookie name used by Express session.
-    // If you've configured a different name, use that instead.
-    res.redirect(`${process.env.CLIENT_URL}`); // Optionally redirect to the home page or login page
+    // Send a success response to the client
+    return res.status(200).json({ message: 'Logout successful.' });
   });
 };
+
 
 
 export const checkAuthStatus = (req, res) => {

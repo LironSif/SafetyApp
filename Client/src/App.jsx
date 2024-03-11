@@ -11,7 +11,7 @@ const App = () => {
   const { data: user, isLoading } = useCheckAuthStatusQuery();
   return (
     <BrowserRouter>
-      <Navbar user={user} />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

@@ -5,9 +5,11 @@ import User from '../../../models/User.js'; // Ensure this path is correctly poi
 
 export const localStrategy = new LocalStrategy({ usernameField: 'email' },
   async (email, password, done) => {
+    console.log(email,password)
     try {
       const user = await User.findOne({ email: email.toLowerCase() });
       // Handle user not found
+      console.log(user)
       if (!user) {
         return done(null, false, { message: 'Email not found.' });
       }

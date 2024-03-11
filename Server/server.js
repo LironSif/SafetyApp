@@ -25,6 +25,7 @@ const CLIENT_PORT = process.env.CLIENT_PORT;
 
 
 const allowedOrigins = [
+  'http://localhost:5173',
   `${BASE_SERVER_URL}:${CLIENT_PORT}`,
   "https://safetyapp2.netlify.app",
 ];

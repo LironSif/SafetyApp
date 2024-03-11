@@ -8,7 +8,7 @@ const FULL_SERVER_URL = clientUrl;
 
 router.post('/signup', signupUser);
 router.post('/login', loginUser);
-router.get('/logout', logoutUser);
+router.put('/logout', logoutUser);
 router.get('/login/success', checkAuthStatus);
 
 // Google authentication and callback routes
