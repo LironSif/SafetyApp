@@ -39,9 +39,12 @@ const EmployeesDetails = () => {
   
   return (
     <div className="setup-div">
+
       <h3 className="setup-name">Add Employee </h3>
 
       <div className="factory-details-form">
+              
+      <div className="first-ses"> 
       <div className="add-input">
       <label>
         Employee Email:
@@ -54,23 +57,26 @@ const EmployeesDetails = () => {
       </label>
       <button className="add-btn" type="button" onClick={handleAddEmail}>Add</button>
       </div>
-      <div className='t'>
+      </div>
+      <div className='selected-array'>
         {emails.map((email, index) => (
-          <div key={index} className="email-tag">
+          <div key={index} className="div-like-btn">
             {email}
             <button className='remove-x-btn' type="button" onClick={() => handleRemoveEmail(email)}>x</button>
           </div>
         ))}
       </div>
+
       {isSuccess && <div>Employees updated successfully!</div>}
       {isError && <div>Error updating employees: {error?.data?.message || 'An error occurred'}</div>}
       
-    </div>
+
     <div className="button-main-div">
         <div className="form-button-group">
       <button type="button" onClick={handleSubmit} disabled={isLoading}   className={`update-button ${isSuccess ? "success" : ""}`} >
         {isLoading ? 'Updating...' : 'Update '}
       </button>
+    </div>
     </div>
     </div>
     </div>

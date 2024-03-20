@@ -6,6 +6,8 @@ import {
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "./FactoryDetails.css";
 import validateForm from "../../validations/validateForm";
+import welcomeMessage from "../TypeEffect/Message.js";
+import MessageWithTypingEffect from "../TypeEffect/TypeEffect.jsx";
 
 const FactoryDetails = () => {
   const factoryId = localStorage.getItem("factoryId");
@@ -77,9 +79,15 @@ const FactoryDetails = () => {
   return (
     <div className="setup-div">
       <h3 className="setup-name">Factory Details</h3>
+      <div className="msg">
+      <MessageWithTypingEffect message={welcomeMessage} />
+      </div>
 
       <div className="factory-details-form">
-        <form onSubmit={(e) => e.preventDefault()}>
+              
+              <div className="first-ses"> 
+        
+        <form className="form-div" onSubmit={(e) => e.preventDefault()}>
           {Object.keys(formState).map((key) => (
             <div key={key} className="form-field">
               <span>
@@ -120,6 +128,7 @@ const FactoryDetails = () => {
             </div>
           )}
         </form>
+ 
       </div>
       <div className="button-main-div">
         <div className="form-button-group">
@@ -140,6 +149,7 @@ const FactoryDetails = () => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

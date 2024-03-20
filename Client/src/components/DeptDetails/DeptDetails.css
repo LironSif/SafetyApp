@@ -1,43 +1,28 @@
 
-.setup-div{
-  width: 100%;
-  height: 100%;
-  border: 1px solid black;
-  padding: 10px;
+.dept-option,
+.selected-dept {
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid #007bff;
+  cursor: pointer;
 }
-  
-  .factory-details-form, .selected-departments {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  
-  .dept-option, .selected-dept {
-    padding: 5px 10px;
-    border-radius: 20px;
-    border: 1px solid #007bff;
-    cursor: pointer;
-  }
-  
-  .dept-option.selected, .selected-dept {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .plus-sign {
-    margin-left: 10px;
-  }
-  
-  .remove-dept {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .error-message {
-    color: #dc3545;
-  }
-  
-  /* Add more styling as needed */
-  
+
+.dept-option.selected,
+.selected-dept {
+  background-color: #007bff;
+  color: white;
+}
+
+.plus-sign {
+  margin-left: 10px;
+}
+
+.remove-dept {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+
+

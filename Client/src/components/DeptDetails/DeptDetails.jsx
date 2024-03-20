@@ -1,40 +1,67 @@
-import React, { useState, useEffect } from 'react';
-import { useGetDepartmentsByFactoryIdQuery, useUpdateDepartmentMutation } from '../../services/departmentApi';
-import Spinner from '../../components/Spinner/Spinner.jsx';
-import './DeptDetails.css';
+import React, { useState, useEffect } from "react";
+import {
+  useGetDepartmentsByFactoryIdQuery,
+  useUpdateDepartmentMutation,
+} from "../../services/departmentApi";
+import Spinner from "../../components/Spinner/Spinner.jsx";
+import "./DeptDetails.css";
+import MessageWithTypingEffect from "../TypeEffect/TypeEffect.jsx";
+import welcomeMessage from "../TypeEffect/Message.js";
 
 const DeptDetails = () => {
   const [selectedDepartments, setSelectedDepartments] = useState([]);
-  const [departments] = useState(["Office", "Maintenance", "Manufacturing", "Storage", "Yard"]);
-  const factoryId = localStorage.getItem('factoryId');
+  const [departments] = useState([
+    "Office",
+    "Maintenance",
+    "Manufacturing",
+    "Storage",
+    "Yard",
+  ]);
+  const factoryId = localStorage.getItem("factoryId");
 
-  const { data: existingDepartments, isError, error, isLoading: isFetching } = useGetDepartmentsByFactoryIdQuery(factoryId);
-  const [updateDepartment, { isLoading: isUpdating, isSuccess, isError: isUpdateError, error: updateError }] = useUpdateDepartmentMutation();
+  const {
+    data: existingDepartments,
+    isError,
+    error,
+    isLoading: isFetching,
+  } = useGetDepartmentsByFactoryIdQuery(factoryId);
+  const [
+    updateDepartment,
+    {
+      isLoading: isUpdating,
+      isSuccess,
+      isError: isUpdateError,
+      error: updateError,
+    },
+  ] = useUpdateDepartmentMutation();
 
   useEffect(() => {
     // Assuming existingDepartments is structured as an array of department objects
     if (existingDepartments) {
-      const deptNames = existingDepartments.map(dept => dept.name); // Adjust based on your data structure
+      const deptNames = existingDepartments.map((dept) => dept.name); // Adjust based on your data structure
       setSelectedDepartments(deptNames);
     }
   }, [existingDepartments]);
 
   const handleSelectDepartment = (dept) => {
     if (!selectedDepartments.includes(dept)) {
-      setSelectedDepartments(prev => [...prev, dept]);
+      setSelectedDepartments((prev) => [...prev, dept]);
     } else {
-      setSelectedDepartments(prev => prev.filter(d => d !== dept));
+      setSelectedDepartments((prev) => prev.filter((d) => d !== dept));
     }
   };
 
   const handleRemoveDepartment = (dept) => {
-    setSelectedDepartments(prev => prev.filter(d => d !== dept));
+    setSelectedDepartments((prev) => prev.filter((d) => d !== dept));
   };
 
   const handleUpdate = async () => {
     try {
-      await updateDepartment({ factoryId, departments: selectedDepartments }).unwrap();
-      alert('Departments updated successfully');
+      await updateDepartment({
+        factoryId,
+        departments: selectedDepartments,
+      }).unwrap();
+      alert("Departments updated successfully");
     } catch (updateError) {
       console.error("Update failed:", updateError);
     }
@@ -45,38 +72,71 @@ const DeptDetails = () => {
   return (
     <div className="setup-div">
       <h3 className="setup-name">Add Department</h3>
+      <div className="msg">
+        <MessageWithTypingEffect message={welcomeMessage} />
+      </div>
       <div className="factory-details-form">
-        {departments.map((dept) => (
-          <div key={dept} className={`dept-option ${selectedDepartments.includes(dept) ? 'selected' : ''}`} onClick={() => handleSelectDepartment(dept)}>
-            {dept} <span className="plus-sign">+</span>
-          </div>
-        ))}
-      </div>
-      <div className="selected-departments">
-        {selectedDepartments.map((dept) => (
-          <div key={dept} className="selected-dept">
-            {dept} <button className="remove-dept" onClick={() => handleRemoveDepartment(dept)}>x</button>
-          </div>
-        ))}
-      </div>
-      {isError && (
-        <div className="error-message">
-          {error?.data?.message || "An error occurred fetching departments"}
+        <div className="first-ses">
+          {departments.map((dept) => (
+            <div
+              key={dept}
+              className={`dept-option ${
+                selectedDepartments.includes(dept) ? "selected" : ""
+              }`}
+              onClick={() => handleSelectDepartment(dept)}
+            >
+              {dept} <span className="plus-sign">+</span>
+            </div>
+          ))}
         </div>
-      )}
-      {isUpdateError && (
-        <div className="error-message">
-          {updateError?.data?.message || "An error occurred updating departments"}
+
+        <div className="selected-array ">
+          {isUpdating ? (
+            <Spinner />
+          ) : (
+            selectedDepartments.map((dept) => (
+              <div key={dept} className="div-like-btn">
+                {dept}{" "}
+                <button
+                  className="remove-dept"
+                  onClick={() => handleRemoveDepartment(dept)}
+                >
+                  x
+                </button>
+              </div>
+            ))
+          )}
         </div>
-      )}
-      <div className="button-main-div">
-        <div className="form-button-group">
-          <button type="button" onClick={handleUpdate} disabled={isUpdating || isSuccess} className={`update-button ${isSuccess ? "success" : ""}`}>
-            {isUpdating ? <Spinner /> : isSuccess ? "Updated" : "Update"}
-          </button>
-          <button type="button" className="clear-button" onClick={() => window.location.reload()}>
-            Clear
-          </button>
+
+        {isError && (
+          <div className="error-message">
+            {error?.data?.message || "An error occurred fetching departments"}
+          </div>
+        )}
+        {isUpdateError && (
+          <div className="error-message">
+            {updateError?.data?.message ||
+              "An error occurred updating departments"}
+          </div>
+        )}
+        <div className="button-main-div ">
+          <div className="form-button-group">
+            <button
+              type="button"
+              onClick={handleUpdate}
+              disabled={isSuccess}
+              className={`update-button ${isSuccess ? "success" : ""}`}
+            >
+              {isSuccess ? "Updated" : "Update"}
+            </button>
+            <button
+              type="button"
+              className="clear-button"
+              onClick={() => window.location.reload()}
+            >
+              Clear
+            </button>
+          </div>
         </div>
       </div>
     </div>

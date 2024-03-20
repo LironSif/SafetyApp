@@ -1,8 +1,12 @@
 import React from 'react'
+import Spinner from '../Spinner/Spinner'
 
 const ConfigDept = () => {
   return (
-    <div>ConfigDept</div>
+    <div>
+      
+      <Spinner/>
+      </div>
   )
 }
 

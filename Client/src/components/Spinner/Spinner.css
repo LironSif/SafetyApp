@@ -1,22 +1,70 @@
 .spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* height: 100vh;
-    width: 100vw; This will take the full height of the viewport */
+  display: grid;
+  grid-template-columns: repeat(2, 50px);
+  gap: 4px; /* Reduced gap for closer positioning */
+  justify-items: center;
+  align-items: center;
+  width: 110px; /* Adjusted for closer positioning */
+  height: 110px; /* Adjusted for closer positioning */
+  animation: rotate-container var(--rotation-speed) infinite linear;
+}
+
+@keyframes rotate-container {
+  to {
+    transform: rotate(360deg);
   }
-  
-  .spinner {
-    border: 5px solid rgba(0, 0, 0, 0.1); /* Light grey border */
-    border-top: 5px solid #3498db; /* Blue border */
+}
+
+.shape {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle, .square, .circle-to-square {
+  animation: rotate-shape var(--animation-speed) infinite linear;
+}
+
+@keyframes rotate-shape {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: #ff0f43;
+  width: 40px; /* Adjusted size */
+  height: 40px; /* Adjusted size */
+}
+
+.square {
+  background-color: #1c4662;
+  width: 30px; /* Adjusted size */
+  height: 30px; /* Adjusted size */
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid #ffbf2a; /* The triangle's color */
+  animation: rotate-shape var(--animation-speed) infinite linear;
+}
+
+.circle-to-square {
+  background-color: #217dff;
+  width: 35px; /* Adjusted size */
+  height: 35px; /* Adjusted size */
+  animation: circle-to-square var(--animation-speed) infinite linear;
+}
+
+@keyframes circle-to-square {
+  0%, 100% {
     border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    animation: spin 1s linear infinite;
   }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  50% {
+    border-radius: 0;
   }
-  
+}
