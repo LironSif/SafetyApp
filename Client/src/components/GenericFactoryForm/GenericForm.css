@@ -1,0 +1,82 @@
+/* GenericFactoryForm.css */
+
+.generic-form {
+    width: 630px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #FFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .formField {
+    margin-bottom: 15px;
+  }
+  
+  .formField label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .formField input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Make sure padding doesn't affect overall width */
+  }
+  
+  .formField input:focus {
+    border-color: #007bff;
+    outline: none; /* Removes the default focus outline */
+  }
+  
+  .formButton button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .formButton button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .formButton button:not(:disabled):hover {
+    background-color: #0056b3;
+  }
+  
+  .error-message {
+    color: #dc3545;
+    margin-top: 5px;
+  }
+  
+  /* Spinner styles if needed */
+  .spinner {
+    display: inline-block;
+    /* Further spinner styling */
+  }
+  .button-success {
+    background-color: #28a745; /* A green tone for success */
+    color: white;
+  }
+  
+  
+  .form-success .formField input,
+  .form-success .formField label {
+    color: #6c757d; /* Muted text color to indicate no further input is needed */
+    pointer-events: none;
+  }
+  
+  .error-message {
+    color: #dc3545; /* Error red */
+  }
+  

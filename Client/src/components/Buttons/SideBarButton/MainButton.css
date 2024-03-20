@@ -1,0 +1,37 @@
+.MainButton {
+    display: flex;
+    width: 100%;
+    align-items: center; 
+    background-color: #f8f9fa;
+    border: none;
+    font-weight: 500;
+    color: rgb(23, 24, 35);
+    font-size: 14px;
+    line-height: 20px;
+    /* cursor: pointer; */
+    padding: 2px 5px; 
+  }
+
+
+  .MainButton img {
+    width: 22px;
+    height: 22px;
+    margin-right: 10px; /* Adjust right margin for spacing between icon and text */
+  }
+  
+  .SubButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    color: rgb(65, 65, 70);
+    font-size: 14px;
+    line-height: 20px;
+    margin-left: 37px; /* Adjust left margin for positioning sub-buttons */
+    cursor: pointer;
+  }
+  

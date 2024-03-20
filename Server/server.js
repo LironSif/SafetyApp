@@ -8,9 +8,12 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 
 // Import custom middleware and routes
-import "./middleware/authentication/passportConfig.js"; // Passport configuration for authentication strategies
-import autaRoute from './routes/authRoutes.js'; // Authentication routes (login, logout, etc.)
-import secureRoute from './routes/factoryRoute.js'; // Test routes to demonstrate secured access
+import "./middleware/authentication/passportConfig.js"; 
+import autaRoute from './routes/authRoutes.js'; 
+import factoryRoutes from './routes/factoryRoutes.js'; 
+import departmentRoutes from './routes/departmentRoutes.js'; 
+import employeeRoutes from './routes/employeeRoutes.js'; 
+
 import ensureAuthenticated from './middleware/authentication/ensureAuthenticated.js';
 
 // Load environment variables from .env file for secure configuration
@@ -78,7 +81,10 @@ app.use("/auth", autaRoute);
 // Secured routes
 // Using ensureAuthenticated middleware to protect routes under "/test"
 // Only authenticated users can access these routes
-app.use("/private", ensureAuthenticated, secureRoute);
+// app.use("/private", ensureAuthenticated, secureRoute);
+app.use('/api/factories', ensureAuthenticated ,factoryRoutes);
+app.use('/api/departments', ensureAuthenticated, departmentRoutes);
+app.use('/api/employees', ensureAuthenticated, employeeRoutes);
 
 // Connect to MongoDB using the connection string from .env
 mongoose.connect(process.env.MONGO_URI).then(() => {

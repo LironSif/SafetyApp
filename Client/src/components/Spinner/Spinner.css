@@ -1,0 +1,22 @@
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh;
+    width: 100vw; This will take the full height of the viewport */
+  }
+  
+  .spinner {
+    border: 5px solid rgba(0, 0, 0, 0.1); /* Light grey border */
+    border-top: 5px solid #3498db; /* Blue border */
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  

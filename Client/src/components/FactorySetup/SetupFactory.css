@@ -1,0 +1,45 @@
+.setup-factory {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* Ensure content uses the full height */
+  height: 100vh;
+}
+
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center; /* Aligns buttons to each side */
+  margin-top: 20px; /* Adds some space above the buttons */
+  margin-bottom: 20px; /* Adds some space above the buttons */
+  gap: 10px;
+  padding: 0 20px; /* Adds some padding on the sides */
+}
+
+.navigation-buttons button {
+  padding: 10px 20px; /* Adjust padding to fit your design */
+  border: none; /* Removes the border */
+  border-radius: 5px; /* Adds rounded corners */
+  font-size: 16px; /* Adjust font size as needed */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.navigation-buttons button:hover {
+  background-color: #007bff; /* Change to your preferred hover background color */
+  color: #ffffff; /* Change text color on hover */
+}
+
+/* Specific styles for the Next button */
+.navigation-buttons button.next {
+  min-width: 100px;
+  width: 100px;
+  background-color: #3E6EF4; /* Green background */
+  color: white; /* White text */
+}
+
+/* Specific styles for the Previous button */
+.navigation-buttons button.prev {
+  width: 100px;
+  background-color: #3E6EF4; /* Red background */
+  color: white; /* White text */
+}

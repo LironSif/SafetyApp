@@ -1,0 +1,57 @@
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+}
+
+.hero-welcome-text {
+  position: absolute;
+  top: 35%;
+  left: 10%;
+  transform: translateY(-50%);
+  max-width: 40%; /* Control the width of the welcome div here */
+  color: black; /* Assuming the text needs to stand out against a dark image */
+}
+
+.hero-heading {
+  font-size: 2.5rem; /* Adjust the font size here */
+  margin-bottom: 0.5em;
+}
+
+.hero-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: justify;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: 768px) {
+  .hero-welcome-text {
+    left: 5%;
+    max-width: 90%;
+  }
+
+  .hero-heading {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-heading {
+    font-size: 1.5rem;
+  }
+
+  .hero-description {
+    -webkit-line-clamp: 4; /* More lines for narrower screens */
+  }
+}

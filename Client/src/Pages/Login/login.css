@@ -38,7 +38,7 @@
   border: 1px solid #D2D4DB;
   border-radius: 8px;
   padding: 2px 24px 24px 24px;
-  width: 300px;
+  width: 335px;
 }
 
 /* Typography */
@@ -87,7 +87,7 @@
   cursor: pointer;
 }
 .actionButton {
-  width: 40%;
+  /* width: 40%; */
   height: 40px;
   font-weight: 500;
 }

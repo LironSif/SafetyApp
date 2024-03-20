@@ -1,0 +1,57 @@
+.quick-setup {
+  position: relative;
+  padding-left: 50px; /* Ensure space for the circle and line */
+}
+
+.GenericForm {
+
+  margin-top: 20px;
+  position: relative;
+}
+
+.GenericForm .form-header {
+  position: absolute;
+  left: -38px; /* Adjust based on the circle size to align it outside the form */
+  top: 0;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: gray;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.GenericForm:not(:last-child):after {
+  content: "";
+  position: absolute;
+  left: -25px; /* Align with the center of the circle */
+  top: 30px; /* Start from the bottom of the circle */
+  bottom: -20px; /* Extend slightly beyond the form for continuous lines */
+  border-left: 2px solid gray;
+}
+.circle.success {
+  background-color: blue; 
+}
+
+.GenericForm.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.circle.success {
+  background-color: blue; /* Adjust color as needed */
+}
+
+.form-success {
+  border-color: blue; /* Adjust color as needed */
+}
+
+.GenericForm.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

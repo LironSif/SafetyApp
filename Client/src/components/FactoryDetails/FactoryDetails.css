@@ -1,0 +1,95 @@
+
+
+/* FactoryDetails.css */
+
+.setup-div{
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    padding: 10px;
+}
+.factory-details-form {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.form-field {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.form-field label {
+    color: #333;
+    font-weight: 600;
+}
+
+.form-field input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-button-group {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.form-button-group button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.update-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.update-button:disabled, .update-button.success {
+    background-color: #28a745;
+}
+
+.clear-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.change-button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.error-message {
+    color: #dc3545;
+    margin-top: 5px;
+}
+
+.display-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid black; */
+    padding: 10px;
+}
