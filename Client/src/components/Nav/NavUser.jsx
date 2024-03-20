@@ -9,6 +9,8 @@ const NavUser = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  
+  localStorage.setItem('factoryId', user.factory);
   const avatarSrc = user?.avatar || logo;
   let userName = user?.email || 'Welcome, Guest!';
 
