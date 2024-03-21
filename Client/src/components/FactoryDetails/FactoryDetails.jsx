@@ -3,11 +3,11 @@ import {
   useUpdateFactoryMutation,
   useGetFactoryByIdQuery,
 } from "../../services/factoryApi";
-import Spinner from "../../components/Spinner/Spinner.jsx";
+import Spinner3 from "../../components/Spinner/Spinner3";
 import "./FactoryDetails.css";
 import validateForm from "../../validations/validateForm";
-import welcomeMessage from "../TypeEffect/Message.js";
 import MessageWithTypingEffect from "../TypeEffect/TypeEffect.jsx";
+import welcomeMessage from "../TypeEffect/Message.js";
 
 const FactoryDetails = () => {
   const factoryId = localStorage.getItem("factoryId");
@@ -27,6 +27,7 @@ const FactoryDetails = () => {
     employeeCount: false,
   });
   const [formErrors, setFormErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (factory) {
@@ -38,28 +39,30 @@ const FactoryDetails = () => {
     }
   }, [factory]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      setSuccessMessage("Update successful!");
+      setTimeout(() => setSuccessMessage(""), 2000);
+    }
+  }, [isSuccess]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormState((prevState) => ({ ...prevState, [name]: value }));
     setFormErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate = async (e) => {
+    e.preventDefault();
     const validationErrors = validateForm(formState);
     setFormErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      const updatePayload = {
-        ...formState,
-        employeeCount: parseInt(formState.employeeCount, 10),
-        id: factoryId,
-      };
-
       try {
-        await updateFactory(updatePayload).unwrap();
-        alert("Update successful"); // Or any other success indication
-      } catch (updateError) {
-        console.error("Update failed:", updateError);
+        await updateFactory({ ...formState, id: factoryId }).unwrap();
+        // Success feedback is handled via useEffect
+      } catch (err) {
+        // Error feedback is already handled through isError and error states
       }
     }
   };
@@ -68,45 +71,63 @@ const FactoryDetails = () => {
     setEditMode((prev) => ({ ...prev, [field]: !prev[field] }));
   };
 
-  if (isFetchingFactory) {
-    return (
-      <div className="spinner-container">
-        <Spinner />
-      </div>
-    );
-  }
+  const handleClear = () => {
+    // Reset the formState to initial values
+    setFormState({
+      name: "",
+      address: "",
+      employeeCount: "",
+    });
+
+    // Reset all fields to not be in editMode
+    setEditMode({
+      name: false,
+      address: false,
+      employeeCount: false,
+    });
+
+    // Clear any existing form errors
+    setFormErrors({});
+
+    // Optionally, clear any success messages
+    setSuccessMessage("");
+  };
+
+  if (isFetchingFactory) return <Spinner3 />;
 
   return (
     <div className="setup-div">
       <h3 className="setup-name">Factory Details</h3>
       <div className="msg">
-      <MessageWithTypingEffect message={welcomeMessage} />
+        <MessageWithTypingEffect message={welcomeMessage} />
       </div>
 
       <div className="factory-details-form">
-              
-              <div className="first-ses"> 
-        
-        <form className="form-div" onSubmit={(e) => e.preventDefault()}>
+        <form className="form-div" onSubmit={handleUpdate}>
           {Object.keys(formState).map((key) => (
-            <div key={key} className="form-field">
-              <span>
-                <strong>
-                  {key.charAt(0).toUpperCase() +
-                    key.slice(1).replace("Count", " Count")}
-                  :{" "}
-                </strong>
-                {editMode[key] ? (
-                  <input
-                    type="text"
-                    name={key}
-                    value={formState[key]}
-                    onChange={handleChange}
-                  />
-                ) : (
-                  <span>{formState[key]}</span>
-                )}
-              </span>
+            <div
+              key={key}
+              className={`form-field ${editMode[key] ? "editing" : ""}`}
+            >
+              <label htmlFor={key} className="email-label">
+                {key.charAt(0).toUpperCase() +
+                  key.slice(1).replace("Count", " Count")}
+                :
+              </label>
+              {/* Input and button elements */}
+
+              {editMode[key] ? (
+                <input
+                  id={key}
+                  type="text"
+                  name={key}
+                  className="email-input"
+                  value={formState[key]}
+                  onChange={handleChange}
+                />
+              ) : (
+                <div className="form-static-content">{formState[key]}</div>
+              )}
               <button
                 type="button"
                 onClick={() => handleEditModeToggle(key)}
@@ -116,40 +137,33 @@ const FactoryDetails = () => {
               </button>
             </div>
           ))}
-          <div className="error-message">
-            {Object.values(formErrors).map((error, index) => (
-              <div key={index}>{error}</div>
-            ))}
-          </div>
 
+          <div className="form-button-group">
+            <button
+              type="button"
+              className="clear-button"
+              onClick={handleClear}
+            >
+              Clear
+            </button>
+            <button
+              type="submit"
+              disabled={isUpdating}
+              className="update-button"
+            >
+              {isUpdating ? <Spinner3 /> : "Update"}
+            </button>
+          </div>
           {isError && (
             <div className="error-message">
               {error?.data?.message || "An error occurred"}
             </div>
           )}
+          {successMessage && (
+            <div className="success-message">{successMessage}</div>
+          )}
         </form>
- 
       </div>
-      <div className="button-main-div">
-        <div className="form-button-group">
-          <button
-            type="button"
-            onClick={handleUpdate}
-            disabled={isUpdating || isSuccess}
-            className={`update-button ${isSuccess ? "success" : ""}`}
-          >
-            {isUpdating ? <Spinner /> : isSuccess ? "Updated" : "Update"}
-          </button>
-          <button
-            type="button"
-            className="clear-button"
-            onClick={() => window.location.reload()}
-          >
-            Clear
-          </button>
-        </div>
-      </div>
-    </div>
     </div>
   );
 };

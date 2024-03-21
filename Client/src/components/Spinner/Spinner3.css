@@ -1,0 +1,90 @@
+.spinner3-container {
+  position: relative;
+  width: 200px; /* Container size */
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.spinner3-item {
+  position: absolute;
+  width: 50px; /* Based on your image sizes */
+  height: 50px;
+  bottom: 50%; /* Position items under the worker */
+}
+
+@keyframes scale-change-hut {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(0.8) rotate(-90deg); /* Slightly shrink and rotate in opposite direction */
+  }
+  50% {
+    transform: scale(1.1) rotate(-180deg); /* Grow larger than original and continue rotating */
+  }
+  75% {
+    transform: scale(0.9) rotate(-270deg); /* Shrink again and rotate */
+  }
+}
+
+.spinner3-hut {
+  animation: rotate-around 6s linear infinite, scale-change-hut 4s ease-in-out infinite alternate;
+  left: 50%; /* Centralize before rotation */
+  transform-origin: center bottom;
+}
+
+
+.spinner3-goggles {
+  animation: rotate-around 6s linear infinite, scale-change 4s ease-in-out infinite alternate;
+  left: 30%; /* Adjust for visual spacing */
+  transform-origin: center bottom;
+}
+
+.spinner3-hammer {
+  animation: rotate-around 6s linear infinite, scale-change 5s ease-in-out infinite alternate;
+  right: 30%; /* Adjust for visual spacing */
+  transform-origin: center bottom;
+}
+
+.spinner3-worker {
+  position: absolute;
+  width: 100px; /* Adjust based on actual image size */
+  height: 100px;
+  z-index: 2; /* Ensures worker is visually on top */
+  top: -10%; /* Adjust for worker's position */
+  left: 25%;
+  transform: translateX(-50%);
+  animation: worker-pop 4s ease-in-out infinite;
+}
+
+@keyframes rotate-around {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes scale-change {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.5); } /* Change scale dynamically */
+}
+
+@keyframes worker-pop {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) scale(1.2) rotate(360deg); /* Faster spin as it starts to grow */
+  }
+  50% {
+    transform: translateY(-20px) scale(1.5) rotate(720deg); /* Continues spinning, reaching largest size */
+  }
+  75% {
+    transform: translateY(-20px) scale(1.2) rotate(1080deg); /* Begins to slow down */
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(1440deg); /* Slows down as it returns to original size */
+  }
+}
+

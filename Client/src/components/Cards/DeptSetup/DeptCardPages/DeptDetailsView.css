@@ -1,0 +1,89 @@
+/* Container for the department view, with hover effects for scale and shadow */
+.dept-view-container {
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-bottom: 20px; /* Space between department cards */
+  }
+  
+  .dept-view-container:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Header of the department card */
+  .dept-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+    border-radius: 5px 5px 0 0; /* Rounded top corners */
+  }
+  
+  /* Department name styling */
+  .dept-name {
+    margin: 0;
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  /* Toggle button styling */
+  .toggle-btn {
+    font-size: 1.5rem; /* 24px */
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .toggle-btn:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Styling for paragraphs within the department details */
+  .dept-details p {
+    color: #333;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-left: 15px; /* Indentation for detail text */
+  }
+  
+  /* Unique and colorful Edit button styling */
+  .edit-btn {
+    background-color: #28a745; /* Bootstrap success green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    align-self: flex-end;
+    margin: 10px 15px 15px 15px; /* Positioning */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .edit-btn:hover {
+    background-color: #218838; /* Darker green */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Additional details styling */
+  .dept-details {
+    padding: 10px 15px;
+    background-color: #f8f9fa; /* Light background for the detail section */
+    border-radius: 0 0 5px 5px; /* Rounded bottom corners */
+  }
+  
+  /* Factory ID special styling */
+  .factory-id {
+    padding-left: 15px;
+    color: #6c757d; /* Bootstrap secondary gray */
+  }
+  

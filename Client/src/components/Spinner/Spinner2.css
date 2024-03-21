@@ -1,0 +1,63 @@
+.spinner2-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner2-worker-animate {
+    animation: spinner2-spinAndShrink 600ms ease-in-out forwards;
+}
+
+@keyframes spinner2-spinAndShrink {
+    0% {
+        transform: rotate(0deg) scale(1);
+        border-radius: 0%;
+    }
+    100% {
+        transform: rotate(1080deg) scale(0.5);
+        border-radius: 50%;
+    }
+}
+
+.spinner2-hut-grow {
+    animation: spinner2-grow 600ms ease-in-out forwards;
+}
+
+@keyframes spinner2-grow {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.spinner2-goggles-slide {
+    animation: spinner2-slideIn 600ms ease-in-out forwards;
+}
+
+@keyframes spinner2-slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.spinner2-hammer-spin {
+    animation: spinner2-hammerRotate 600ms ease-in-out forwards;
+}
+
+@keyframes spinner2-hammerRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

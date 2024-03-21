@@ -5,7 +5,8 @@ import {
   getAllDepartments,
   updateDepartment,
   deleteDepartment,
-  getAllDepartmentsByFactoryId
+  getAllDepartmentsByFactoryId,
+  updateDepartments
 } from '../controllers/departmentController.js'; // Assuming factoryController2.js is meant for departments
 
 const router = express.Router();
@@ -24,6 +25,9 @@ router.get('/', getAllDepartments);
 
 // Update a department by ID
 router.put('/:id', updateDepartment);
+
+// Add this route to your department routes
+router.put('/updateByFactory/:factoryId', updateDepartments); // Match the URL you used in the RTK Query mutation
 
 // Delete a department by ID
 router.delete('/:id', deleteDepartment);

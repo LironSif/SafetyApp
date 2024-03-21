@@ -1,70 +1,79 @@
 .spinner-container {
-  display: grid;
-  grid-template-columns: repeat(2, 50px);
-  gap: 4px; /* Reduced gap for closer positioning */
-  justify-items: center;
-  align-items: center;
-  width: 110px; /* Adjusted for closer positioning */
-  height: 110px; /* Adjusted for closer positioning */
+  display: flex;
+  flex-wrap: wrap;
+  width: 240px;
+  height: 240px;
+  position: relative;
+  margin: auto; /* Center the spinner */
   animation: rotate-container var(--rotation-speed) infinite linear;
 }
 
-@keyframes rotate-container {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .shape {
+  width: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.circle, .square, .circle-to-square {
   animation: rotate-shape var(--animation-speed) infinite linear;
+  position: absolute;
 }
 
-@keyframes rotate-shape {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.circle {
-  border-radius: 50%;
-  background-color: #ff0f43;
-  width: 40px; /* Adjusted size */
-  height: 40px; /* Adjusted size */
-}
-
-.square {
-  background-color: #1c4662;
-  width: 30px; /* Adjusted size */
-  height: 30px; /* Adjusted size */
-}
-
+.circle { background-color: #e84118; }
+.square { background-color: #192a56; }
 .triangle {
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 40px solid #ffbf2a; /* The triangle's color */
-  animation: rotate-shape var(--animation-speed) infinite linear;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-bottom: 50px solid #fbc531;
+}
+.circle-to-square { background-color: #8c7ae6; }
+
+/* New animations */
+/* .spinner-hammer {
+  position: absolute;
+  max-width: 100px;
+  max-height: 100px;
+  bottom: 100%;
+  left: 10%;
+  animation: rotate-hammer 2s linear infinite;
+} */
+
+@keyframes rotate-hammer {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(90deg); }
 }
 
-.circle-to-square {
-  background-color: #217dff;
-  width: 35px; /* Adjusted size */
-  height: 35px; /* Adjusted size */
-  animation: circle-to-square var(--animation-speed) infinite linear;
+/* Goggles: Move vertically as specified, then return */
+.spinner-goggles {
+  position: absolute;
+  max-width: 100px;
+  max-height: 100px;
+  bottom: 10%; /* Starting position */
+  animation: move-goggles 2000ms infinite ease-in-out;
 }
 
-@keyframes circle-to-square {
-  0%, 100% {
-    border-radius: 50%;
-  }
-  50% {
-    border-radius: 0;
-  }
+@keyframes move-goggles {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-100px); } /* Moves up and returns */
 }
+
+.spinner-hammer {
+  position: absolute;
+
+  max-width: 100px;
+  max-height: 100px;
+  animation: rotate-hammer 3s infinite ease-in-out;
+}
+
+@keyframes rotate-hammer {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-90deg); } /* Rotate 90 degrees to the left */
+  50%, 75% { transform: rotate(-90deg); } /* Stay rotated */
+}
+
+@keyframes stay-and-fall {
+  0%, 20% { transform: translateY(-100px); }
+  100% { transform: translateY(-50px) scale(0.95); }
+}
+

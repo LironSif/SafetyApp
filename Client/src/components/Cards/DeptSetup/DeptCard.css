@@ -22,7 +22,7 @@
   background: none;
 }
 
-.dept-name {
+.dept-name h2{
   color: #FFFF;
   margin: 0;
 }
@@ -35,10 +35,4 @@
 
 .dept-details {
   margin-top: 20px;
-}
-.department-cards-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around; 
-  width: 100%;
 }

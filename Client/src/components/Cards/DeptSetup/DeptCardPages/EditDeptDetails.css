@@ -1,0 +1,43 @@
+
+/* General styling for action buttons */
+/* Container for action buttons */
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Styling for the 'Previous' button, using a more subdued color */
+  .action-btn.previous {
+    background-color: #6c757d; /* Bootstrap secondary color */
+    color: white;
+  }
+  
+  .action-btn.previous:hover {
+    background-color: #5a6268; /* A slightly darker shade */
+    transform: translateY(-2px);
+  }
+  
+  /* Styling for the 'Update' button, using a vibrant color */
+  .action-btn.update {
+    background-color: #28a745; /* Bootstrap success green, as before */
+    color: white;
+  }
+  
+  .action-btn.update:hover {
+    background-color: #218838; /* Darker green */
+    transform: translateY(-2px);
+  }
+  

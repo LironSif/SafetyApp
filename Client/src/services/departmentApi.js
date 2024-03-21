@@ -38,6 +38,14 @@ export const departmentApi = createApi({
       }),
       invalidatesTags: ['Department'],
     }),
+    updateDepartments: builder.mutation({
+      query: ({ factoryId, departments }) => ({
+        url: `/updateByFactory/${factoryId}`, // Note: Adjust the URL as necessary
+        method: 'PUT',
+        body: { departments },
+      }),
+      invalidatesTags: ['Department'],
+    }),
     deleteDepartment: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
@@ -54,5 +62,6 @@ export const {
   useGetDepartmentsByFactoryIdQuery,
   useCreateDepartmentMutation,
   useUpdateDepartmentMutation,
+  useUpdateDepartmentsMutation,
   useDeleteDepartmentMutation,
 } = departmentApi;

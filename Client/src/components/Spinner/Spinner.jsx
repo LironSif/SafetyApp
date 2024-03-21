@@ -1,23 +1,25 @@
-// import React from 'react';
-// import './Spinner.css'; // Import the CSS for styling
-
-// const Spinner = () => (
-//   <div className="spinner-container">
-//     <div className="spinner"></div>
-//   </div>
-// );
-
-// export default Spinner;
 import React from 'react';
-import './Spinner.css'; // Make sure the CSS file is correctly imported
+import './Spinner.css'; // Ensure this is the correct path to your CSS file
 
-const Spinner = ({ circleSpeed = '1s', squareSpeed = '1.5s', triangleSpeed = '2s', rotationSpeed = '3s' }) => {
+// Importing images
+import hammerImg from '../../assets/spinner/hammar.png';
+import gogglesImg from '../../assets/spinner/goggles.png';
+import Spinner2 from './Spinner2';
+
+const Spinner = ({ 
+  circleSpeed = '1s', 
+  squareSpeed = '1.5s', 
+  triangleSpeed = '2s', 
+  rotationSpeed = '3s' 
+}) => {
   return (
-    <div className="spinner-container" style={{ ['--rotation-speed']: rotationSpeed }}>
-      <div className="shape circle" style={{ ['--animation-speed']: circleSpeed }}></div>
-      <div className="shape square" style={{ ['--animation-speed']: squareSpeed }}></div>
-      <div className="shape triangle" style={{ ['--animation-speed']: triangleSpeed }}></div>
-      <div className="shape circle-to-square" style={{ ['--animation-speed']: squareSpeed }}></div>
+    <div>
+    <div className="spinner-container" style={{ ['--rotation-speed']: rotationSpeed }}> 
+
+      </div>
+      {/* New additions: Hammer and Goggles images */}
+      <img src={hammerImg} className="spinner-hammer" alt="Hammer"/>
+      <img src={gogglesImg} className="spinner-goggles" alt="Goggles"/>
     </div>
   );
 };

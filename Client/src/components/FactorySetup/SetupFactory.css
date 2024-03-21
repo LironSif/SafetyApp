@@ -1,151 +1,93 @@
-.setup-factory {
+.setup-factory, .department-cards-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around; /* Ensure content uses the full height */
+  justify-content: space-around;
+}
+
+.setup-factory {
   height: 100vh;
-  font-family:  '"Euclid Square", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',;
 }
-.button-main-div{
-  margin-top: 10px;
-  padding: 8px;
-  /* border: 1px solid rgb(64, 50, 146); */
+
+.department-cards-container {
+  width: 100%;
 }
-input {
-  margin-left: 10px;
+
+.first-ses {
+  display: flex;
+flex-wrap: wrap;
+  /* background-color: #FFFF; */
+}
+ .selected-array, .first-ses {
+  margin: 10px 0;
+  padding: 20px;
+  border: 1px solid rgb(64, 50, 146);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inputx, .form-div, .factory-details-form {
+  width: 100%;
+}
+
+input, label, .msg, .error-message {
+  margin: 10px 0;
   padding: 5px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 4px;
-  min-width: 22px
 }
-h3{
+
+input {
+  min-width: 22px;
+}
+
+h3 {
   color: #007bff;
   font-weight: 800;
   font-size: 30px;
 }
-label{
 
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-.msg{
-  margin:  20px;
-  /* padding: 20px; */
-  border: 1px solid #ccc;
-}
-.selected-array {
-  padding: 20px;
+.navigation-buttons, .form-button-group {
   display: flex;
-  flex-wrap: wrap;
-  border: 1px solid rgb(64, 50, 146);
-  margin:  10px 0 10px 0;
+  justify-content: center;
   gap: 10px;
-}
-.first-ses{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  border: 1px solid rgb(64, 50, 146);
-  padding: 20px;
-  margin:  10px 0 10px 0;
-  gap: 10px;
+  margin: 20px 0;
+  padding: 0 20px;
 }
 
-.factory-details-form  {
-  width: 100%;
-  margin: 20px auto;
-  padding: 20px;
-  background: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-}
-
-.error-message {
-  color: #dc3545;
-}
-.inputx{
-display: flex;
-flex-wrap: wrap;
-
-}
-.form-div{
-  width: 100%;
-}
-.form-button-group {
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-}
-
-.form-button-group button {
+/* Unified Button Styling */
+.navigation-buttons button, .form-button-group button, .div-like-btn button {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.2s;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-
-.navigation-buttons {
-  display: flex;
-  justify-content: center; /* Aligns buttons to each side */
-  margin-top: 20px; /* Adds some space above the buttons */
-  margin-bottom: 20px; /* Adds some space above the buttons */
-  gap: 10px;
-  padding: 0 20px; /* Adds some padding on the sides */
+.navigation-buttons button:hover, .form-button-group button:hover, .div-like-btn button:hover {
+  background-color: #218838; /* Darker shade for hover state */
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.navigation-buttons button {
-  padding: 10px 20px; /* Adjust padding to fit your design */
-  border: none; /* Removes the border */
-  border-radius: 5px; /* Adds rounded corners */
-  font-size: 16px; /* Adjust font size as needed */
-  cursor: pointer; /* Changes cursor to pointer on hover */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
-}
-
-.navigation-buttons button:hover {
-  background-color: #007bff; /* Change to your preferred hover background color */
-  color: #ffffff; /* Change text color on hover */
-}
-
-/* Specific styles for the Next button */
-.navigation-buttons button.next {
+/* Additional Styling for Specific Button Types if needed */
+.navigation-buttons button.next, .navigation-buttons button.prev {
   min-width: 100px;
-  width: 100px;
-  background-color: #3E6EF4; /* Green background */
-  color: white; /* White text */
+  background-color: #3E6EF4; /* Example primary color */
+  color: white;
 }
 
-/* Specific styles for the Previous button */
-.navigation-buttons button.prev {
-  width: 100px;
-  background-color: #3E6EF4; /* Red background */
-  color: white; /* White text */
-}
-
-.div-like-btn{
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 5px 10px;
-  margin: 5px;
-  background-color: #007bff;
+.div-like-btn {
+  background-color: #007bff; /* Primary color */
   color: white;
   border-radius: 20px;
-  cursor: default;
-
 }
 
 .div-like-btn button {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  padding: 2px 6px;
+  background-color: #dc3545; /* Danger color */
 }

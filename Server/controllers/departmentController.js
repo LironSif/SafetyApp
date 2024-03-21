@@ -50,6 +50,53 @@ export const createMultipleDepartments = async (req, res) => {
 };
 
 
+
+export const updateDepartments = async (req, res) => {
+  const { factoryId } = req.params;
+  const { departments: newDepartmentNames } = req.body;
+
+  try {
+    const factory = await Factory.findById(factoryId);
+    if (!factory) {
+      return res.status(404).json({ message: 'Factory not found' });
+    }
+
+    // Fetch existing departments by factoryId
+    const existingDepartments = await FactoryDepartment.find({ factoryId });
+
+    // Determine departments to be added and removed
+    const existingNames = existingDepartments.map(dep => dep.name);
+    const departmentsToAdd = newDepartmentNames.filter(name => !existingNames.includes(name));
+    const departmentsToRemove = existingDepartments.filter(dep => !newDepartmentNames.includes(dep.name));
+
+    // Remove departments not in the new list
+    for (const department of departmentsToRemove) {
+      await FactoryDepartment.findByIdAndDelete(department._id);
+    }
+
+    // Add new departments
+    for (const name of departmentsToAdd) {
+      await new FactoryDepartment({
+        name,
+        factoryId, // Ensure this matches your schema requirement
+      }).save();
+    }
+
+    // Update the Factory's departments array
+    // Fetch the updated list of department IDs after additions/removals
+    const updatedDepartmentDocs = await FactoryDepartment.find({ factoryId });
+    factory.departments = updatedDepartmentDocs.map(dep => dep._id);
+
+    await factory.save();
+
+    res.json({ message: 'Departments updated successfully' });
+
+  } catch (error) {
+    console.error("Failed to update departments:", error);
+    res.status(500).json({ message: 'Error updating departments', error: error.toString() });
+  }
+};
+
 // Get a single department by ID
 export const getDepartment = async (req, res) => {
   try {

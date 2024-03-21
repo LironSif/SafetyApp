@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
   useGetDepartmentsByFactoryIdQuery,
-  useUpdateDepartmentMutation,
+  useUpdateDepartmentsMutation, // Updated to use the new mutation
 } from "../../services/departmentApi";
 import Spinner from "../../components/Spinner/Spinner.jsx";
 import "./DeptDetails.css";
 import MessageWithTypingEffect from "../TypeEffect/TypeEffect.jsx";
 import welcomeMessage from "../TypeEffect/Message.js";
+import Spinner3 from "../Spinner/Spinner3.jsx";
 
 const DeptDetails = () => {
   const [selectedDepartments, setSelectedDepartments] = useState([]);
@@ -25,20 +26,21 @@ const DeptDetails = () => {
     error,
     isLoading: isFetching,
   } = useGetDepartmentsByFactoryIdQuery(factoryId);
+  
+  // Updated to use the new mutation hook
   const [
-    updateDepartment,
+    updateDepartments, // Renamed to reflect the new functionality
     {
       isLoading: isUpdating,
       isSuccess,
       isError: isUpdateError,
       error: updateError,
     },
-  ] = useUpdateDepartmentMutation();
+  ] = useUpdateDepartmentsMutation();
 
   useEffect(() => {
-    // Assuming existingDepartments is structured as an array of department objects
     if (existingDepartments) {
-      const deptNames = existingDepartments.map((dept) => dept.name); // Adjust based on your data structure
+      const deptNames = existingDepartments.map((dept) => dept.name);
       setSelectedDepartments(deptNames);
     }
   }, [existingDepartments]);
@@ -57,7 +59,7 @@ const DeptDetails = () => {
 
   const handleUpdate = async () => {
     try {
-      await updateDepartment({
+      await updateDepartments({ // Updated to reflect the new function name
         factoryId,
         departments: selectedDepartments,
       }).unwrap();
@@ -67,7 +69,7 @@ const DeptDetails = () => {
     }
   };
 
-  if (isFetching) return <Spinner />; // Show a loading spinner while fetching existing departments
+  if (isFetching) return <Spinner />;
 
   return (
     <div className="setup-div">
@@ -92,7 +94,7 @@ const DeptDetails = () => {
 
         <div className="selected-array ">
           {isUpdating ? (
-            <Spinner />
+            <Spinner3/>
           ) : (
             selectedDepartments.map((dept) => (
               <div key={dept} className="div-like-btn">
@@ -123,18 +125,18 @@ const DeptDetails = () => {
           <div className="form-button-group">
             <button
               type="button"
+              className="clear-button"
+              onClick={() => window.location.reload()}
+            >
+              Clear
+            </button>
+            <button
+              type="button"
               onClick={handleUpdate}
               disabled={isSuccess}
               className={`update-button ${isSuccess ? "success" : ""}`}
             >
               {isSuccess ? "Updated" : "Update"}
-            </button>
-            <button
-              type="button"
-              className="clear-button"
-              onClick={() => window.location.reload()}
-            >
-              Clear
             </button>
           </div>
         </div>
