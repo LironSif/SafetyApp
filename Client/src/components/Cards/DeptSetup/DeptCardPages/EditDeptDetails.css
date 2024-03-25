@@ -1,43 +1,139 @@
-
-/* General styling for action buttons */
-/* Container for action buttons */
-.buttons-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
+.edit-dept-details {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
   
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: auto;
+
+}
+
+.edit-dept-details h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.edit-dept-details label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.edit-dept-details select,
+.edit-dept-details input[type="text"],
+.edit-dept-details input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.chemicals-question-container {
+  margin: 20px 0;
+}
+
+.response-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 16px;
+  margin-right: 10px;
+  outline: none;
+}
+
+.response-btn.yes {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.response-btn.yes:hover,
+.response-btn.yes:focus {
+  background-color: #45a049;
+}
+
+.response-btn.no {
+  background-color: #f44336;
+  color: white;
+}
+
+.response-btn.no:hover,
+.response-btn.no:focus {
+  background-color: #d32f2f;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
 
 .action-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Styling for the 'Previous' button, using a more subdued color */
-  .action-btn.previous {
-    background-color: #6c757d; /* Bootstrap secondary color */
-    color: white;
-  }
-  
-  .action-btn.previous:hover {
-    background-color: #5a6268; /* A slightly darker shade */
-    transform: translateY(-2px);
-  }
-  
-  /* Styling for the 'Update' button, using a vibrant color */
-  .action-btn.update {
-    background-color: #28a745; /* Bootstrap success green, as before */
-    color: white;
-  }
-  
-  .action-btn.update:hover {
-    background-color: #218838; /* Darker green */
-    transform: translateY(-2px);
-  }
-  
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.action-btn.previous {
+  background-color: #6c757d;
+  color: white;
+}
+
+.action-btn.previous:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+.action-btn.update {
+  background-color: #28a745;
+  color: white;
+}
+
+.action-btn.update:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+option{
+  color: #333;
+}
+.edit-dept-details select[multiple] {
+  height: auto; /* Adjust based on your design needs */
+  overflow: auto;
+}
+#employeesSelect {
+  display: flex;
+  flex-direction: column;
+  max-height: 200px;
+  background-color: white;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+/* #employeesSelect div {
+  margin-bottom: 5px;
+} */
+
+#employeesSelect label {
+  margin-left: 5px;
+}
+.add-employee-div{
+  display: flex;
+  justify-content: space-between;
+}
+
+.span{
+  margin-bottom: 10px;
+}

@@ -33,20 +33,27 @@ const ConfigDept = () => {
     return <div>Please select a factory to configure departments.</div>;
 
   return (
-    <div className="setup-div">
-      <h3 className="setup-name">Configure Your Departments</h3>
-      <div className="msg">
+    <div className="card-div">
+      <div className="card-name">
+        <h2>Configure Your Departments </h2>
+      </div>
+      
+      <div className="crad-msg">
         <MessageWithTypingEffect message={welcomeMessage} />
       </div>
-      <div className="factory-details-form">
-        <div className="first-ses"> 
-      <div className="department-cards-container">
-        {departments?.map((dept) => (
-          <DeptCard key={dept.id} department={dept} />
-        ))}
+      <div className="card-content">
+        <div className="card-header">Set departments</div>
+        <div className="selected-array-name">
+          <h4>Edit your factory departments:</h4>
+        </div>
+        <div className="first-ses">
+          <div className="department-cards-container">
+            {departments?.map((dept) => (
+              <DeptCard key={dept.id} department={dept} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
   );
 };

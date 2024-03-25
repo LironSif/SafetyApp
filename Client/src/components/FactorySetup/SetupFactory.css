@@ -1,53 +1,63 @@
-.setup-factory, .department-cards-container {
+/* Layout for setup-factory and department-cards-container */
+.setup-factory,
+.department-cards-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
+/* Full viewport height for setup-factory */
 .setup-factory {
   height: 100vh;
 }
 
+/* Full width for department cards container */
 .department-cards-container {
   width: 100%;
+  /* overflow-y: auto; */
 }
 
+/* Styling for first session cards */
 .first-ses {
-  display: flex;
-flex-wrap: wrap;
-  /* background-color: #FFFF; */
-}
- .selected-array, .first-ses {
   margin: 10px 0;
   padding: 20px;
-  border: 1px solid rgb(64, 50, 146);
+  /* border: 1px solid rgb(64, 50, 146); */
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
 }
 
-.inputx, .form-div, .factory-details-form {
+/* Styling for selected array cards, identical to .first-ses for now */
+.selected-array {
+  margin: 10px 0;
+  padding: 20px;
+  border: 1px solid rgb(64, 50, 146);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Full width for input fields, forms, and div containers */
+.inputx,
+.form-div {
   width: 100%;
 }
 
-input, label, .msg, .error-message {
-  margin: 10px 0;
+/* Basic styling for input, label, message, and error message */
+input,
+label,
+
+.error-message {
+  margin-top: 10px ;
   padding: 5px;
-  /* border: 1px solid #ccc; */
   border-radius: 4px;
 }
 
-input {
-  min-width: 22px;
-}
-
-h3 {
-  color: #007bff;
-  font-weight: 800;
-  font-size: 30px;
-}
-
-.navigation-buttons, .form-button-group {
+/* Flex container for navigation and form buttons */
+.navigation-buttons,
+.form-button-group {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -55,8 +65,9 @@ h3 {
   padding: 0 20px;
 }
 
-/* Unified Button Styling */
-.navigation-buttons button, .form-button-group button, .div-like-btn button {
+/* Unified styling for all buttons */
+.navigation-buttons button,
+.form-button-group button {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -68,26 +79,50 @@ h3 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.navigation-buttons button:hover, .form-button-group button:hover, .div-like-btn button:hover {
-  background-color: #218838; /* Darker shade for hover state */
+/* Hover effect for buttons */
+.navigation-buttons button:hover,
+.form-button-group button:hover,
+.div-like-btn button:hover {
+  background-color: #218838;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Additional Styling for Specific Button Types if needed */
-.navigation-buttons button.next, .navigation-buttons button.prev {
+/* Specific styles for next and prev buttons */
+.navigation-buttons button.next,
+.navigation-buttons button.prev {
   min-width: 100px;
-  background-color: #3E6EF4; /* Example primary color */
+  background-color: #3e6ef4;
   color: white;
 }
 
+/* Styling for a div that acts like a button */
 .div-like-btn {
-  background-color: #007bff; /* Primary color */
+  background-color: #007bff;
   color: white;
   border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.2s;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
 }
-
 .div-like-btn button {
-  background-color: #dc3545; /* Danger color */
+ margin-left: 4px;
+  padding: 8px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.2s;
+  text-transform: uppercase; 
+}
+/* Specific button within .div-like-btn */
+.div-like-btn button {
+  background-color: #dc3545;
+  border-radius: 20px;
 }

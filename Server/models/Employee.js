@@ -18,11 +18,11 @@ const CertificationSchema = new Schema({
 const FactoryEmployeeSchema = new Schema({
   name: String,
   position: String,
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true }, // Set the email field as unique
   factory: { // Adding reference to Factory schema
     type: Schema.Types.ObjectId,
     ref: 'Factory',
-    required: true, // Set to true if every employee must be associated with a factory, otherwise set to false
+    required: true,
   },
   department: {
     type: Schema.Types.ObjectId,

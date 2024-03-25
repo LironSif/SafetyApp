@@ -8,6 +8,7 @@
     -ms-user-select: none;
     user-select: none;
     margin-bottom: 20px; /* Space between department cards */
+    background-color: #f8f9fa;
   }
   
   .dept-view-container:hover {

@@ -15,21 +15,39 @@ export const createEmployee = async (req, res) => {
   }
 
   try {
-    // Iterate over each email and create a new employee
-    const employeeIds = await Promise.all(emails.map(async (email) => {
-      const newEmployee = new FactoryEmployee({ email, factory: factoryId }); // Include factory reference
-      const savedEmployee = await newEmployee.save();
-      return savedEmployee._id;
-    }));
+    let existingEmails = [];
+    let newEmployeeIds = [];
+
+    // Check each email for existence before creating a new employee
+    for (const email of emails) {
+      const employeeExists = await FactoryEmployee.findOne({ email });
+      if (employeeExists) {
+        existingEmails.push(email);
+      } else {
+        const newEmployee = new FactoryEmployee({ email, factory: factoryId }); // Include factory reference
+        const savedEmployee = await newEmployee.save();
+        newEmployeeIds.push(savedEmployee._id);
+      }
+    }
+
+    if (existingEmails.length) {
+      // If there are existing emails, send a message back indicating which emails already exist
+      return res.status(400).json({ 
+        message: 'Some emails already exist and were not added.', 
+        existingEmails 
+      });
+    }
 
     // Update the factory to include these new employees
-    await Factory.findByIdAndUpdate(
-      factoryId,
-      { $push: { employees: { $each: employeeIds } } }, // Use $each to push multiple values
-      { new: true }
-    );
+    if (newEmployeeIds.length) {
+      await Factory.findByIdAndUpdate(
+        factoryId,
+        { $push: { employees: { $each: newEmployeeIds } } }, // Use $each to push multiple values
+        { new: true }
+      );
+    }
 
-    res.status(201).json({ message: 'Employees created successfully', employeeIds });
+    res.status(201).json({ message: 'Employees created successfully', employeeIds: newEmployeeIds });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

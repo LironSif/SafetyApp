@@ -17,6 +17,7 @@ const DeptDetails = () => {
     "Manufacturing",
     "Storage",
     "Yard",
+    "Other",
   ]);
   const factoryId = localStorage.getItem("factoryId");
 
@@ -69,15 +70,25 @@ const DeptDetails = () => {
     }
   };
 
-  if (isFetching) return <Spinner />;
+  const handleClear = () => {
+    setSelectedDepartments([]); // Reset the selectedDepartments to an empty array
+  };
+
 
   return (
-    <div className="setup-div">
-      <h3 className="setup-name">Add Department</h3>
-      <div className="msg">
+    <div className="card-div">
+    <div className="card-name">
+      <h2>Department setup</h2>
+      </div>
+      <div className="crad-msg">
         <MessageWithTypingEffect message={welcomeMessage} />
       </div>
-      <div className="factory-details-form">
+      <div className="card-content">
+      <div className="card-header">
+        Add Department
+        </div>
+        
+        <div className="selected-array-name">Department options:</div>
         <div className="first-ses">
           {departments.map((dept) => (
             <div
@@ -92,6 +103,7 @@ const DeptDetails = () => {
           ))}
         </div>
 
+        <div className="selected-array-name"><h4>Selected departments:</h4></div>
         <div className="selected-array ">
           {isUpdating ? (
             <Spinner3/>
@@ -123,10 +135,10 @@ const DeptDetails = () => {
         )}
         <div className="button-main-div ">
           <div className="form-button-group">
-            <button
+          <button
               type="button"
               className="clear-button"
-              onClick={() => window.location.reload()}
+              onClick={handleClear}
             >
               Clear
             </button>

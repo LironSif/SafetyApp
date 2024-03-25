@@ -1,0 +1,121 @@
+.add-chemical-container {
+  position: relative;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.add-chemical-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.results-dropdown {
+  /* position: absolute; */
+  width: calc(100% - 20px);
+  border: 1px solid #ccc;
+  background: white;
+  z-index: 1000;
+  list-style-type: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 4px;
+  top: 100%;
+  left: 0;
+}
+
+.results-dropdown li {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.results-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+.selected-chemicals-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.selected-chemical {
+  padding: 6px 8px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.selected-chemical:hover {
+  background-color: #0056b3;
+}
+
+.add-to-department-btn {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-to-department-btn:hover {
+  background-color: #218838;
+}
+.selected-chemical {
+  padding: 6px 8px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: default;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.remove-chemical-btn {
+  margin-left: 10px;
+  background-color: red;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: bold;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.remove-chemical-btn:hover {
+  background-color: darkred;
+}

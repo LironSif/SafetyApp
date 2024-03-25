@@ -25,4 +25,79 @@
 }
 
 
+/* .card-name h2,
+.card-header {
+  color: #333;
+  font-size: 24px; 
+  margin-bottom: 15px;
+} */
+/* 
+.crad-msg, .card-content {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+} */
+
+/* Styling for department options and selected departments */
+.dept-option, .div-like-btn {
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #007bff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dept-option.selected, .div-like-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Hover effect for interactive elements */
+.dept-option:hover, .div-like-btn:hover {
+  background-color: #0056b3;
+  color: #fff;
+}
+
+
+.remove-dept:hover {
+  background-color: darkred;
+}
+
+
+.clear-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: #f05011;
+}
+
+.update-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.update-button:hover {
+  background-color: #218838;
+}
+
+.update-button.success {
+  background-color: #4CAF50; /* Success color */
+}
+
+.button-main-div {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Center align the button group */
+}
+
+.form-button-group {
+  display: flex;
+  justify-content: space-between; /* Space out buttons */
+}
+
 
