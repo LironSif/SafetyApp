@@ -62,10 +62,13 @@ const App = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showFullNavBar, showMobileNavBar]);
 
+  // Determine if NavBar should be hidden based on the current path
+  const shouldHideNavBars = ["/login", "/signup"].includes(location.pathname);
+
   return (
     <div className="app">
-      {showMobileNavBar && <MobileNavBar onToggle={toggleFullNavBarVisibility} />}
-      {showFullNavBar && <NavBar ref={navBarRef} />}
+      {!shouldHideNavBars && showMobileNavBar && <MobileNavBar onToggle={toggleFullNavBarVisibility} />}
+      {!shouldHideNavBars && showFullNavBar && <NavBar ref={navBarRef} />}
       <div className="page">
         <Routes>
           <Route path="/" element={<Home />} />

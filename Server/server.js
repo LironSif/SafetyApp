@@ -37,12 +37,13 @@ app.set("trust proxy", 1);
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log("Incoming origin:", origin); // Debug incoming origin
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
       callback(new Error("Invalid origin"));
     }
-  },
+},
   credentials: true, // This is important for cookies, authorization headers with HTTPS
 };
 
