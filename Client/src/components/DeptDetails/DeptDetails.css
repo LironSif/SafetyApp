@@ -1,108 +1,67 @@
+/* Since DeptDetails shares many elements with FactoryDetails and EmployeesDetails,
+   re-use general styles and apply specific enhancements as needed. */
 
-.dept-option,
-.selected-dept {
-  padding: 5px 10px;
-  border-radius: 20px;
-  border: 1px solid #007bff;
-  cursor: pointer;
+/* Reusing card, header, and content styles */
+.card-div, .card-name h2, .card-header, .card-msg, .card-content {
+  /* The styles provided for FactoryDetails are applicable here as well */
 }
 
-.dept-option.selected,
-.selected-dept {
-  background-color: #007bff;
-  color: white;
+/* Styling for department options */
+.dept-option, .selected-array-name h4, .selected-array, .div-like-btn {
+  /* Align these styles with the button and input styles from EmployeesDetails */
 }
 
-.plus-sign {
-  margin-left: 10px;
-}
-
-.remove-dept {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-
-/* .card-name h2,
-.card-header {
-  color: #333;
-  font-size: 24px; 
-  margin-bottom: 15px;
-} */
-.card-content {
-  background-color: #F8F9FA;
-  border: 1px solid rgb(201, 201, 201);
-}
-
-
-/* .crad-msg, .card-content {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 20px;
-} */
-
-/* Styling for department options and selected departments */
-.dept-option, .div-like-btn {
-  display: inline-block;
+/* Department options - selection and interaction */
+.dept-option {
   margin: 5px;
   padding: 8px 12px;
   background-color: #f0f0f0;
-  border: 1px solid #007bff;
+  border: 1px solid #007bff; /* Primary color for border */
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
 
-.dept-option.selected, .div-like-btn {
-  background-color: #007bff;
+/* Hover and active state for department options */
+.dept-option:hover, .dept-option.selected, .div-like-btn:hover {
+  background-color: #0056b3; /* Darker shade for interaction */
   color: white;
 }
 
-/* Hover effect for interactive elements */
-.dept-option:hover, .div-like-btn:hover {
-  background-color: #0056b3;
-  color: #fff;
+/* Remove button for selected departments */
+.remove-dept {
+  margin-left: 10px;
+  background-color: #dc3545; /* Danger color for removal actions */
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
 }
-
 
 .remove-dept:hover {
   background-color: darkred;
 }
 
-
-.clear-button {
-  background-color: #6c757d;
-  color: white;
+/* Button styles - leveraging consistency */
+.clear-button, .update-button {
+  /* Use the styles defined in FactoryDetails for consistency */
 }
 
-.clear-button:hover {
-  background-color: #f05011;
+/* Adapt the success and error message styles */
+.success-message, .error-message {
+  /* These styles should also be consistent across components */
 }
 
-.update-button {
-  background-color: #28a745;
-  color: white;
-}
-
-.update-button:hover {
-  background-color: #218838;
-}
-
-.update-button.success {
-  background-color: #4CAF50; /* Success color */
-}
-
+/* Layout adjustments for better alignment and presentation */
 .button-main-div {
   margin-top: 20px;
   display: flex;
-  justify-content: center; /* Center align the button group */
+  justify-content: space-around;
 }
 
 .form-button-group {
   display: flex;
-  justify-content: space-between; /* Space out buttons */
+  gap: 10px;
+  justify-content: space-between; /* Adjust based on your layout preference */
 }
-
-

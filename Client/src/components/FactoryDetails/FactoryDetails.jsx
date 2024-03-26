@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  useUpdateFactoryMutation,
-  useGetFactoryByIdQuery,
-} from "../../services/factoryApi";
+import { useUpdateFactoryMutation, useGetFactoryByIdQuery } from "../../services/factoryApi";
 import Spinner3 from "../../components/Spinner/Spinner3";
 import "./FactoryDetails.css";
 import validateForm from "../../validations/validateForm";
@@ -11,27 +8,17 @@ import welcomeMessage from "../TypeEffect/Message.js";
 
 const FactoryDetails = () => {
   const factoryId = localStorage.getItem("factoryId");
-  const { data: factory, isLoading: isFetchingFactory } =
-    useGetFactoryByIdQuery(factoryId);
-  const [updateFactory, { isLoading: isUpdating, isSuccess, isError, error }] =
-    useUpdateFactoryMutation();
+  const { data: factory, isLoading: fetchingFactory } = useGetFactoryByIdQuery(factoryId);
+  const [updateFactory, { isLoading: updatingFactory, isSuccess, isError, error }] = useUpdateFactoryMutation();
 
-  const [formState, setFormState] = useState({
-    name: "",
-    address: "",
-    employeeCount: "",
-  });
-  const [editMode, setEditMode] = useState({
-    name: false,
-    address: false,
-    employeeCount: false,
-  });
-  const [formErrors, setFormErrors] = useState({});
+  const initialDetails = { name: "", address: "", employeeCount: "" };
+  const [factoryDetails, setFactoryDetails] = useState(initialDetails);
+  const [editStates, setEditStates] = useState({ name: false, address: false, employeeCount: false });
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (factory) {
-      setFormState({
+      setFactoryDetails({
         name: factory.name || "",
         address: factory.address || "",
         employeeCount: factory.employeeCount?.toString() || "",
@@ -46,125 +33,68 @@ const FactoryDetails = () => {
     }
   }, [isSuccess]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormState((prevState) => ({ ...prevState, [name]: value }));
-    setFormErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
+  const handleChange = (e, field) => {
+    const { value } = e.target;
+    setFactoryDetails(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm(formState);
-    setFormErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
+  const handleSave = async () => {
+    const errors = validateForm(factoryDetails);
+    if (!Object.keys(errors).length) {
       try {
-        await updateFactory({ ...formState, id: factoryId }).unwrap();
-      } catch (err) {
-        console.error("Update failed:", err);
+        await updateFactory({ ...factoryDetails, id: factoryId }).unwrap();
+        setSuccessMessage("All changes saved successfully!");
+        setTimeout(() => setSuccessMessage(""), 2000);
+      } catch (updateError) {
+        console.error("Update failed:", updateError);
       }
     }
   };
 
-  const handleEditModeToggle = (field) => {
-    setEditMode((prev) => ({ ...prev, [field]: !prev[field] }));
+  const handleClear = () => {
+    setFactoryDetails(initialDetails);
   };
 
-  const handleClear = () => {
-    setFormState({
-      name: "",
-      address: "",
-      employeeCount: "",
-    });
-    setEditMode({
-      name: false,
-      address: false,
-      employeeCount: false,
-    });
-    setFormErrors({});
-    setSuccessMessage("");
+  const toggleEditMode = (field) => {
+    setEditStates(prev => ({ ...prev, [field]: !prev[field] }));
   };
+
+  if (fetchingFactory) return <Spinner3 />;
 
   return (
     <div className="card-div">
       <div className="card-name">
         <h2>Factory Details</h2>
       </div>
-      <div className="crad-msg">
+      <div className="card-msg">
         <MessageWithTypingEffect message={welcomeMessage} />
       </div>
-
       <div className="card-content">
         <div className="card-header">Factory Details</div>
-        <section className="card-sec">
-
-          <div className="section-name">Edit factory details:</div>
-          
-          <form className="form-div" onSubmit={handleUpdate}>
-            {isUpdating || isFetchingFactory ? (
-              <Spinner3 />
-            ) : (
-              Object.keys(formState).map((key) => (
-                <div
-                  key={key}
-                  className={`input-rapper ${editMode[key] ? "editing" : ""}`}
-                >
-                  <label htmlFor={key} className="email-label">
-                    {key.charAt(0).toUpperCase() +
-                      key.slice(1).replace("Count", " Count")}
-                    :
-                  </label>
-
-                  {editMode[key] ? (
-                    <input
-                      id={key}
-                      type="text"
-                      name={key}
-                      className="email-input"
-                      value={formState[key]}
-                      onChange={handleChange}
-                    />
-                  ) : (
-                    <div className="form-static-content">{formState[key]}</div>
-                  )}
-                  <div className="vng-btn">
-                  <button
-                    type="button"
-                    onClick={() => handleEditModeToggle(key)}
-                    className="change-button"
-                  >
-                    {editMode[key] ? "Done" : "Change"}
-                  </button>
-                  </div>
-                </div>
-              ))
-            )}
-
-            {isError && (
-              <div className="error-message">
-                {error?.data?.message || "An error occurred"}
-              </div>
-            )}
-            {successMessage && (
-              <div className="success-message">{successMessage}</div>
-            )}
-          </form>
+        <section className="card-section">
+          {Object.entries(factoryDetails).map(([key, value]) => (
+            <div key={key} className="detail-item">
+              <div className="section-name">{key.charAt(0).toUpperCase() + key.slice(1).replace("Count", " Count")}:</div>
+              {editStates[key] ? (
+                <input
+                  type="text"
+                  className="input"
+                  value={value}
+                  onChange={(e) => handleChange(e, key)}
+                />
+              ) : (
+                <div onClick={() => toggleEditMode(key)} className="static-content">{value}</div>
+              )}
+            </div>
+          ))}
+                  <div className="button-main-div">
           <div className="form-button-group">
-            <button
-              type="button"
-              className="clear-button"
-              onClick={handleClear}
-            >
-              Clear
-            </button>
-            <button
-              type="submit"
-              disabled={isUpdating}
-              className="update-button"
-            >
-              Update
-            </button>
+            <button onClick={handleClear} className="clear-button">Clear</button>
+            <button onClick={handleSave} disabled={updatingFactory} className="update-button">Update</button>
           </div>
+          </div>
+          {isError && <div className="error-message">{error?.data?.message || "An error occurred"}</div>}
+          {successMessage && <div className="success-message">{successMessage}</div>}
         </section>
       </div>
     </div>

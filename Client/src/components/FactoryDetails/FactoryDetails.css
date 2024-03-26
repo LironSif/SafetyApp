@@ -1,166 +1,215 @@
-.card-div{
-  width: 100%;
-  height: 100%;
-  padding: 10px;
-  border: 1px solid red;
-  max-height: 100%; /* Ensures the component doesn't grow beyond the parent's height */
-  overflow-y: auto
+/* General Styles for Card Layout */
+.card-div {
+  padding: 20px;
+  background-color: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  width: 800px; /* Fixed width */
+  margin: 40px auto;
+  transition: all 0.3s ease;
 }
 
-/* .card-name{
-  border: 1px solid rgb(0, 0, 0);
-}
-
-.crad-msg{
-    border: 1px solid rgb(0, 0, 0);
-} */
-
-.card-content {
-  margin: 20px auto;
-  padding: 20px ;
-  overflow-y: hidden;
-  /* border: 1px solid rgb(0, 0, 0); */
-  background: #ffffff;
-  border-radius: 8px;
-  max-width: 40vw;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+.card-name h2 {
+  color: #2C3E50;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .card-header {
-  display: flex;
-  justify-content: flex-start;
+  color: #34495E;
   font-size: 22px;
-  margin-bottom: 40px;
-  width: 100%;
-  border: 1px solid rgb(0, 0, 0);
+  font-weight: 500;
+  margin-bottom: 20px;
 }
 
-/* .card-sec{
-  border: 1px solid rgb(0, 0, 0);
-}
-
-.section-name{
-  border: 1px solid rgb(0, 0, 0);
-} */
- .form-div {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border: 1px solid rgb(201, 169, 252);
-}
-
-.form-field {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* Align items to the start */
-  gap: 10px; /* Adjust the gap as needed */
-  margin-bottom: 15px;
-  /* border: 1px solid rgb(0, 0, 0); */
-}
-.input-rapper{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px; /* Adjust the gap as needed */
-}
-.email-label {
-  /* flex-shrink: 0; Prevent the label from shrinking */
-
-  font-weight: bold;
+.card-section, .card-msg, .card-content {
   font-size: 16px;
-  color: #007bff;
-  white-space: nowrap; /* Keep the label text on one line */
+  color: #5D6D7E;
+  margin-bottom: 20px;
 }
-.fix-left{
-  border: 1px solid #ccc;
+
+/* Input Fields, Labels, and Static Content Enhancements */
+.form-div, .input-wrapper {
   display: flex;
-  justify-content: flex-start;
-}
-.email-input {
-  flex-grow: 0; /* Do not allow the input to grow */
-  display: inline-block; /* Adjust as necessary based on editMode */
-  /* margin-right: auto; Push everything else to the right, closer to label */
-  max-width: 300px; /* Maximum width for the input */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px; /* Larger font size for visibility */
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Matching button font */
-  color: #000; /* Darker color for better readability */
+  flex-direction: column;
+  gap: 15px;
 }
 
-
-
-.form-static-content {
-  background-color: #f8f9fa;
-  flex-grow: 0; /* Do not allow the input to grow */
-  margin-right: auto; /* Push everything else to the right, closer to label */
-  max-width: 300px; /* Maximum width for the input */
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 16px; /* Larger font size for visibility */
-  color: #000; /* Darker color for better readability */
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 10px;
-  border-radius: 4px;
-  max-width: 300px; /* Maximum width for the input */
+.label {
+  font-size: 18px;
+  color: #34495E;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.change-button, .update-button, .clear-button {
+.input, .email-input, .static-content {
+  padding: 12px;
+  border: 2px solid #BDC3C7;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 16px;
+  color: #34495E;
+  background: #ECF0F1;
+  transition: border-color 0.25s ease-in-out;
+}
+
+.input:focus, .email-input:focus {
+  border-color: #3498DB;
+  background: #FFFFFF;
+}
+
+.static-content {
+  cursor: pointer;
+}
+
+/* Button Enhancements */
+.edit-toggle-button, .change-button, .update-button, .clear-button, .add-btn, .remove-dept, .remove-x-btn {
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  transition: background-color 0.3s, box-shadow 0.2s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   color: white;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Consistent font */
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
-.update-button {
-  background-color: #28a745; /* Success color */
-}
-
-.update-button:disabled {
-  background-color: #ccc;
+.edit-toggle-button {
+  background-color: #F1C40F;
 }
 
 .change-button {
-  background-color: #ffc107; /* Warning color */
+  background-color: #3498DB;
+}
+
+.update-button {
+  background-color: #2ECC71;
 }
 
 .clear-button {
-  background-color: #dc3545; /* Clear/Danger color */
+  background-color: #E74C3C;
 }
 
-
-.clear-button:hover {
-  background-color: #f05011;
+.add-btn {
+  background-color: #9B59B6;
 }
 
-/* Adjust hover effects for all buttons */
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+.remove-dept, .remove-x-btn {
+  background-color: #E74C3C;
 }
 
-.error-message, .success-message {
-  color: #dc3545; /* Error color, reused for success for simplicity */
-  margin-top: 5px;
+/* Hover Effects */
+.edit-toggle-button:hover,
+.change-button:hover,
+.update-button:hover,
+.clear-button:hover,
+.add-btn:hover,
+.remove-dept:hover,
+.remove-x-btn:hover {
+  opacity: 0.85;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.update-button:disabled {
+  background-color: #95A5A6;
+  cursor: not-allowed;
+}
+
+/* Success and Error Messages */
+.success-message, .error-message {
+  padding: 12px;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  text-align: left;
+  margin-top: 20px;
 }
 
 .success-message {
-  color: #28a745; /* Success color */
+  background-color: #2ECC71;
+}
+
+.error-message {
+  background-color: #E74C3C;
+}
+
+/* Displaying Arrays of Items (Emails, Departments) Styling */
+.selected-array, .dept-option, .div-like-btn {
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.dept-option, .div-like-btn {
+  padding: 10px;
+  border: 2px solid #3498DB;
+  background-color: #ECF0F1;
+  color: #34495E;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dept-option:hover, .div-like-btn:hover {
+  background-color: #3498DB;
+  color: white;
+}
+
+.dept-option.selected {
+  background-color: #3498DB;
+  color: white;
+}
+
+/* Form Button Group Layout */
+.button-main-div, .form-button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .form-button-group {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
+  justify-content: space-around;
+  width: 100%;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+  .card-div {
+    width: 95%; /* Adjusts width for smaller screens */
+    padding: 15px; /* Slightly reduce padding for more space */
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-name h2, .card-header {
+    font-size: 20px; /* Slightly smaller font size for smaller screens */
+  }
+
+  .input, .email-input, .static-content {
+    padding: 8px; /* Reduced padding for inputs */
+  }
+
+  .edit-toggle-button, .change-button, .update-button, .clear-button, .add-btn, .remove-dept, .remove-x-btn {
+    padding: 8px 12px; /* Smaller padding for buttons */
+    font-size: 12px; /* Smaller font size for text inside buttons */
+  }
+
+  .selected-array, .dept-option, .div-like-btn {
+    gap: 8px; /* Smaller gap between items for compact layout */
+  }
+}
+
+/* Focus and Hover State Enhancements for Better Accessibility */
+.input:focus, .email-input:focus, .static-content:focus {
+  outline: 2px solid #3498DB; /* Highlight focus more clearly */
+}
+
+.dept-option:focus, .div-like-btn:focus, .edit-toggle-button:focus,
+.change-button:focus, .update-button:focus, .clear-button:focus, 
+.add-btn:focus, .remove-dept:focus, .remove-x-btn:focus {
+  outline: none; /* Custom focus styles if necessary */
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5); /* Consistent focus outline */
 }
