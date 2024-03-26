@@ -31,8 +31,13 @@
   font-size: 24px; 
   margin-bottom: 15px;
 } */
-/* 
-.crad-msg, .card-content {
+.card-content {
+  background-color: #F8F9FA;
+  border: 1px solid rgb(201, 201, 201);
+}
+
+
+/* .crad-msg, .card-content {
   font-size: 16px;
   color: #666;
   margin-bottom: 20px;

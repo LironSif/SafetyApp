@@ -6,6 +6,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    border: 1px solid #CCC;
     user-select: none;
     margin-bottom: 20px; /* Space between department cards */
     background-color: #f8f9fa;

@@ -21,7 +21,6 @@
 .first-ses {
   margin: 10px 0;
   padding: 20px;
-  /* border: 1px solid rgb(64, 50, 146); */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -32,7 +31,7 @@
 .selected-array {
   margin: 10px 0;
   padding: 20px;
-  border: 1px solid rgb(64, 50, 146);
+
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
