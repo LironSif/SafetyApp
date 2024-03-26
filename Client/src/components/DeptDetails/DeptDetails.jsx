@@ -4,7 +4,7 @@ import {
   useUpdateDepartmentsMutation, // Updated to use the new mutation
 } from "../../services/departmentApi";
 import Spinner from "../../components/Spinner/Spinner.jsx";
-import "./DeptDetails.css";
+// import "./DeptDetails.css";
 import MessageWithTypingEffect from "../TypeEffect/TypeEffect.jsx";
 import welcomeMessage from "../TypeEffect/Message.js";
 import Spinner3 from "../Spinner/Spinner3.jsx";

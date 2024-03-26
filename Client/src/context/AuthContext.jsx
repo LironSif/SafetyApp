@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { serverApiUrl } from '../Constants/urls'; // Ensure this path is correct
-import Spinner from "../components/Spinner/Spinner.jsx";
 
 const AuthContext = createContext(); // Creating context
 
@@ -65,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {isLoading ? <Spinner /> : children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useCreateEmployeeMutation } from "../../services/employeeApi";
-import "./EmployeesDetails.css";
+// import "./EmployeesDetails.css";
 import MessageWithTypingEffect from "../TypeEffect/TypeEffect";
 import welcomeMessage from "../TypeEffect/Message.js";
 
@@ -55,9 +55,9 @@ const EmployeesDetails = () => {
       <div className="card-content">
         <div className="card-header">Add Employee</div>
 
-        <div className="selected-array-name">Add Employee email:</div>
+        {/* <div className="selected-array-name">Add Employee email:</div> */}
         <div className="fix-left">
-          <div className="first-ses">
+   
             <div className="form-field">
               <div className="lab-in-btn">
                 <div className="selected-array-name">
@@ -81,7 +81,7 @@ const EmployeesDetails = () => {
                 </button>
               </div>
             </div>
-          </div>
+       
         </div>
         <div className="selected-array-name">
           <h4>Added employee:</h4>
