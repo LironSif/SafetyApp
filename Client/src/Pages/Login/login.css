@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #FFFFFF; /* Updated as requested */
+  height: 100%;
 }
 
 /* Header and Main Content Styling */
@@ -22,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 32px;
+  margin: 32px 0 ;
 }
 
 .main {
@@ -39,6 +40,7 @@
   border-radius: 8px;
   padding: 2px 24px 24px 24px;
   width: 335px;
+  /* height: ; */
 }
 
 /* Typography */
@@ -46,9 +48,9 @@
   font-size: 30px;
   line-height: 38px;
   color: rgba(23, 24, 35, 0.85);
-  font-weight: 600;
+  font-weight: bold;
   font-family: "Euclid Square", sans-serif; /* Ensure you load Euclid Square font */
-  margin-bottom: 12px;
+  /* margin-top: 20px; */
 }
 
 .formInput, .accountPrompt, .termsText { /* General style for form inputs, account prompt, and terms text */
