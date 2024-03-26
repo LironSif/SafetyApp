@@ -1,47 +1,80 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login.jsx";
-import SignUp from "./Pages/SignUp/SignUp.jsx";
+import Login from "./Pages/Login/Login";
+import SignUp from "./Pages/SignUp/SignUp";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import SetupYourFactory from "./Pages/setup-your-factory/setup-your-factory";
+import Doco from "./Pages/setup-your-factory/Doco";
+import NavBar from './components/Nav/NavBar';
+import MobileNavBar from './components/Nav/MobileNavBar';
 import "./App.css";
 
-import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
-import SetupYourFactory from "./Pages/setup-your-factory/setup-your-factory.jsx";
-import Doco from "./Pages/setup-your-factory/Doco.jsx";
-import NavBar from './components/Nav/NavBar.jsx'
 const App = () => {
-  const location = useLocation(); // Hook to get the current location
+  const location = useLocation();
+  const [showFullNavBar, setShowFullNavBar] = useState(window.innerWidth >= 950);
+  const [showMobileNavBar, setShowMobileNavBar] = useState(window.innerWidth < 950);
+  const navBarRef = useRef(null);
 
-  // Function to determine if the Sidebar should be displayed
-  const shouldShowSidebar = () => {
-    // List of paths where the Sidebar should not be shown
-    const noSidebarPaths = ["/login", "/signup"];
-    // Check if the current path is in the list of paths to not show the Sidebar
-    return !noSidebarPaths.includes(location.pathname);
+  const updateNavBarVisibility = (isMobile) => {
+    setShowMobileNavBar(isMobile);
+    if (isMobile) {
+      setShowFullNavBar(false);
+    } else {
+      setShowFullNavBar(true);
+    }
   };
+
+  const handleResize = () => {
+    const screenWidth = window.innerWidth;
+    const isMobile = screenWidth < 950;
+    updateNavBarVisibility(isMobile);
+  };
+
+  const toggleFullNavBarVisibility = () => {
+    setShowFullNavBar(!showFullNavBar);
+    setShowMobileNavBar(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (window.innerWidth < 950) {
+      updateNavBarVisibility(true);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navBarRef.current && !navBarRef.current.contains(event.target) && showFullNavBar && window.innerWidth < 950) {
+        setShowFullNavBar(false);
+        setShowMobileNavBar(true);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showFullNavBar, showMobileNavBar]);
 
   return (
     <div className="app">
-    
-      {shouldShowSidebar() && <NavBar />} 
+      {showMobileNavBar && <MobileNavBar onToggle={toggleFullNavBarVisibility} />}
+      {showFullNavBar && <NavBar ref={navBarRef} />}
       <div className="page">
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-
-          <Route path="/getting-started/setup" element={<SetupYourFactory/>} />
-          <Route path="/getting-started/documentation" element={<Doco/>}/>
-          
-          <Route path="/dashboard/factory" element={<Dashboard/>} />
-          <Route path="/dashboard/inventory" element={<Dashboard/>} />
-
-          <Route path="/forms/subcontractor-form" element={<Dashboard/>} />
-          <Route path="/forms/factory" element={<Dashboard/>} />
-
-          <Route path="/chat" element={<Dashboard/>} />
-          {/* You might want to remove the '/wdwdwd' route if it was mistakenly added or update its path */}
+          <Route path="/getting-started/setup" element={<SetupYourFactory />} />
+          <Route path="/getting-started/documentation" element={<Doco />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+          {/* Additional routes as needed */}
         </Routes>
       </div>
     </div>

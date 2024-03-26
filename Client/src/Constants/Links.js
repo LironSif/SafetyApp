@@ -7,7 +7,8 @@ import start from "../assets/icons/start.svg";
 import chat from "../assets/icons/chat.svg";
 import equipment from "../assets/icons/equipment.svg";
 import credit from "../assets/icons/credit.svg";
-import dashboard from "../assets/icons/dashboard.svg";
+import bar from "../assets/icons/bar.svg";
+import con from "../assets/icons/const.svg";
 
 export const links = [
   {
@@ -22,7 +23,7 @@ export const links = [
   {
     name: "Dashboard",
     path: "/dashboard/factory",
-    icon: dashboard,
+    icon: bar,
     subLinks: [
       { name: "Factory", path: "/dashboard/factory" },
       { name: "chemicals", path: "/dashboard/chemicals" },
@@ -31,7 +32,7 @@ export const links = [
   {
     name: "Equipment",
     path: "/equipment/machines",
-    icon: equipment,
+    icon: con,
     subLinks: [
       { name: "Lifting machines", path: "/equipment/machines" },
       { name: "Lifting accessories", path: "/equipment/accessories" },
