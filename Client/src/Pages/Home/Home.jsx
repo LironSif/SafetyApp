@@ -7,6 +7,7 @@ import QuickSetup from '../../components/FactorySetup/QuickSetup.jsx';
 import { useGetDepartmentsQuery } from '../../services/departmentApi';
 import { setQuickSetupComplete } from '../../redux/slices/FactoryCreationSlice';
 
+
 const Home = () => {
   const { user, isLoading } = useAuth();
   const { data: departments, isSuccess } = useGetDepartmentsQuery();
@@ -15,7 +16,7 @@ const Home = () => {
 
   useEffect(() => {
     // Assuming that having at least one department signifies completion
-    if (isSuccess && departments?.length > 0) {
+    if (isSuccess && user.factoryId?.length > 0) {
       dispatch(setQuickSetupComplete(true));
     } else {
       dispatch(setQuickSetupComplete(false));
