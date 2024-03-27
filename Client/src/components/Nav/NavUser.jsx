@@ -6,14 +6,16 @@ import UserMenu from '../UserManu/UserMenu.jsx'; // Ensure the path is correct
 import './NavUser.css';
 
 const NavUser = () => {
-  const { user } = useAuth();
+  const { user,refreshUserData } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     // Set factoryId to user.factory or an empty string if it's not set
     localStorage.setItem('factoryId', user?.factory || '');
   }, [user]); // Dependency array includes user, so this runs when user updates
-
+if(!user){
+  refreshUserData()
+}
   const avatarSrc = user?.avatar || logo;
   let userName = user?.email || 'Welcome, Guest!';
 

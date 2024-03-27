@@ -11,7 +11,7 @@ import './QuickSetup.css';
 import { setQuickSetupComplete } from '../../redux/slices/FactoryCreationSlice'; // Ensure correct import path
 
 const QuickSetup = () => {
-  const { user } = useAuth();
+  const { user } = useAuth(); // Assuming useAuth() could return null or undefined for user
   const dispatch = useDispatch();
   const isFactoryCreated = useSelector((state) => state.factoryCreation.isFactoryCreated);
   const areDepartmentsCreated = useSelector((state) => state.factoryCreation.areDepartmentsCreated);
@@ -25,7 +25,7 @@ const QuickSetup = () => {
         setShowSpinner(false); // Stop showing the spinner after 2 seconds
         setShowModal(true); // Show the modal
         dispatch(setQuickSetupComplete(true)); // Update the state to indicate completion
-      }, 1000);
+      }, 2000); // Adjusted to 2000 to match the comment
     }
   }, [isFactoryCreated, areDepartmentsCreated, dispatch]);
 
@@ -35,8 +35,9 @@ const QuickSetup = () => {
     // Implement your navigation logic here, e.g., redirecting to a different page or section
   };
 
-  const factoryFormSetup = { ...importedFactoryFormSetup, userId: user._id };
-  const departmentFormSetup = { ...importedDeptFormSetup, userId: user._id };
+  // Safeguard to ensure user object and its properties like _id are accessed safely
+  const factoryFormSetup = user ? { ...importedFactoryFormSetup, userId: user._id } : { ...importedFactoryFormSetup };
+  const departmentFormSetup = user ? { ...importedDeptFormSetup, userId: user._id } : { ...importedDeptFormSetup };
 
   return (
     <div className="quick-setup">
