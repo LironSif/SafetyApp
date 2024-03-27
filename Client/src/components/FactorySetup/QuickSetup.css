@@ -1,6 +1,8 @@
 .quick-setup {
   position: relative;
-  padding-left: 50px; /* Ensure space for the circle and line */
+  padding: 50px; /* Ensure space for the circle and line */
+  width: 50%;
+  
 }
 
 .GenericForm {
@@ -55,3 +57,11 @@
   pointer-events: none;
   opacity: 0.5;
 }
+
+@media (max-width: 768px) {
+  .quick-setup {
+    position: relative;
+    padding: 50px; /* Ensure space for the circle and line */
+    width: 100%;
+    
+  }}
