@@ -46,6 +46,7 @@ export const loginUser = (req, res, next) => {
 
 export const signupUser = async (req, res) => {
   const { email, password, name, recaptchaToken } = req.body;
+  console.log(req.body)
 
   // First, verify the reCAPTCHA token
   const isHuman = await verifyRecaptcha(recaptchaToken);
@@ -59,7 +60,7 @@ export const signupUser = async (req, res) => {
 
   try {
     const existingUser = await User.findOne({ email: email.toLowerCase() });
-
+    console.log("loking for user")
     if (existingUser && existingUser.password) {
       // The user exists and has a password already set
       return res.status(409).json({ message: 'Email is already in use.' });
@@ -74,11 +75,13 @@ export const signupUser = async (req, res) => {
 
       // Log the user in automatically after setting the password
       req.logIn(existingUser, (err) => {
+        console.log("loging paasssssssssss")
         if (err) return res.status(500).json({ message: 'Error logging in user.' });
         return res.status(200).json({ message: 'Password set and login successful.', user: existingUser.toObject({ getters: true, virtuals: false }) });
       });
     } else {
       // No existing user, create a new user
+      console.log("crate userrrr fnc")
       const newUser = new User({
         email: email.toLowerCase(),
         password: hashedPassword,
@@ -88,6 +91,7 @@ export const signupUser = async (req, res) => {
 
       // Log the new user in automatically after signup
       req.logIn(newUser, (err) => {
+        console.log("loging sssssssss")
         if (err) return res.status(500).json({ message: 'Error logging in user.' });
         return res.status(201).json({ message: 'Signup and login successful.', user: newUser.toObject({ getters: true, virtuals: false }) });
       });
