@@ -10,7 +10,6 @@ export const createFactory = async (req, res) => {
     return res.status(400).json({ message: "User ID is required." });
   }
 
-  console.log({ name: factoryName, address: factoryAddress, ...otherFactoryData });
 
   try {
     // Check if the user already has a factory associated
