@@ -6,6 +6,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import MongoStore from 'connect-mongo'; // Added for MongoDB session storage
 
 // Import custom middleware and routes
 import "./middleware/authentication/passportConfig.js"; 
@@ -13,7 +14,6 @@ import autaRoute from './routes/authRoutes.js';
 import factoryRoutes from './routes/factoryRoutes.js'; 
 import departmentRoutes from './routes/departmentRoutes.js'; 
 import employeeRoutes from './routes/employeeRoutes.js'; 
-
 import ensureAuthenticated from './middleware/authentication/ensureAuthenticated.js';
 
 // Load environment variables from .env file for secure configuration
@@ -21,11 +21,9 @@ dotenv.config();
 
 // Create the Express application
 const app = express();
-const PORT = process.env.SERVER_PORT || 5000; // Server port, fallback to 3000 if not specified in .env
-const NODE_ENV = process.env.NODE_ENV;
+const PORT = process.env.SERVER_PORT || 5000;
 const BASE_SERVER_URL = process.env.BASE_SERVER_URL;
 const CLIENT_PORT = process.env.CLIENT_PORT;
-
 
 const allowedOrigins = [
   'http://localhost:5173',
@@ -37,70 +35,56 @@ app.set("trust proxy", 1);
 
 const corsOptions = {
   origin: function (origin, callback) {
-    console.log("Incoming origin:", origin); // Debug incoming origin
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
-      callback(new Error("Invalid origin"));
+      callback(new Error("Not allowed by CORS"));
     }
-},
-  credentials: true, // This is important for cookies, authorization headers with HTTPS
+  },
+  credentials: true,
 };
 
-// CORS middleware configuration to allow requests from specified front-end domain
 app.use(cors(corsOptions));
-
-// Middleware to parse JSON request bodies
 app.use(express.json());
-
-// Middleware to parse URL-encoded request bodies (for form submissions)
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Configure session middleware with cookie settings, using secret from .env for encryption
-app.use(
-  session({
-    secret: process.env.SESSION_SECERT,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === "production" ? true : "auto",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : true,
-    },
-  })
-);
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(() => console.log("Connected to MongoDB"))
+  .catch(err => console.error("Could not connect to MongoDB:", err));
 
-// Initialize Passport and session middleware for authentication
+// Configure session middleware to use MongoDB for storage
+app.use(session({
+  secret: process.env.SESSION_SECERT,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  cookie: {
+    secure: process.env.NODE_ENV === "production" ? true : false,
+    sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax', // adjusted for consistency with most configurations
+  },
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-// Public routes
-// Authentication routes (login with Google, GitHub, Facebook, etc.)
+// Routes configuration
 app.use("/auth", autaRoute);
-
-// Secured routes
-// Using ensureAuthenticated middleware to protect routes under "/test"
-// Only authenticated users can access these routes
-// app.use("/private", ensureAuthenticated, secureRoute);
-app.use('/api/factories', ensureAuthenticated ,factoryRoutes);
+app.use('/api/factories', ensureAuthenticated, factoryRoutes);
 app.use('/api/departments', ensureAuthenticated, departmentRoutes);
 app.use('/api/employees', ensureAuthenticated, employeeRoutes);
 
-// Connect to MongoDB using the connection string from .env
-mongoose.connect(process.env.MONGO_URI).then(() => {
-    console.log("Connected to MongoDB");
-    // Start the server only after successful database connection
-    app.listen(PORT, () => {
-      console.log(`Server is listening on PORT: ${PORT}`);
-    });
-}).catch((err) => console.error("MongoDB connection error:", err));
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is listening on PORT: ${PORT}`);
+});
 
-// Global error handling middleware
-// Catches any errors that occur during request processing
+// Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack); // Log error stack for debugging
-  res.status(500).send("Something broke!"); // Send generic error response
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
 });
 
 // Export the app for testing or further configuration
