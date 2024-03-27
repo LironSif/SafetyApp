@@ -33,7 +33,6 @@ const EmployeesDetails = () => {
     // Send all emails in one request
     try {
       const response = await createEmployee({ emails, factoryId }).unwrap();
-      console.log(response); // Log or handle response
       setEmails([]); // Clear emails after successful submission
     } catch (err) {
       console.error("Error creating employees:", err);
