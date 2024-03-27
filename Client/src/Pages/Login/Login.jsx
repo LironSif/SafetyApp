@@ -18,7 +18,7 @@ const LoginForm = () => {
   const [loginUser, { isLoading, isError, error }] = useLoginUserMutation();
 
   const handleFormSubmit = async (formData) => {
-    console.log(formData)
+
     const { isValid, errors } = validateLoginForm(formData);
     setFormErrors(errors); 
 
