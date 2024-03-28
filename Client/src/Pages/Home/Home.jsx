@@ -13,10 +13,10 @@ const Home = () => {
   const { data: departments, isSuccess } = useGetDepartmentsQuery();
   const dispatch = useDispatch();
   const isQuickSetupComplete = useSelector((state) => state.factoryCreation.quickSetupComplete);
-
+console.log(isQuickSetupComplete)
   useEffect(() => {
     // Assuming that having at least one department signifies completion
-    if (isSuccess && user.factoryId?.length > 0) {
+    if (isSuccess && user.factoryId) {
       dispatch(setQuickSetupComplete(true));
     } else {
       dispatch(setQuickSetupComplete(false));
