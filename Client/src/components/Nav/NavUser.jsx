@@ -10,15 +10,16 @@ const NavUser = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set factoryId to user.factory or an empty string if it's not set
-    localStorage.setItem('factoryId', user?.factory || '');
-  }, [user]); // Dependency array includes user, so this runs when user updates
-if(!user){
-  refreshUserData()
-}
+    if (user) {
+      localStorage.setItem('factoryId', user.factory || '');
+    }
+  }, [user]);
+  
   const avatarSrc = user?.avatar || logo;
   let userName = user?.email || 'Welcome, Guest!';
-
+// if(user?){
+//   localStorage.setItem('factoryId', user?.factory || '');
+// }
   if (userName.length > 15) {
     userName = `${userName.substring(0, 15)}...`;
   }
