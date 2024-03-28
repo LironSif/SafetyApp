@@ -31,6 +31,7 @@
 .sub-link.active {
   background-color: #3e6ef4;
   border-radius: 4px;
+  color: white;
   padding: 2px 2px 2px 10px;
 }
 .sub-link.active a {
@@ -54,6 +55,7 @@
 
 /* Optional: Style adjustments for main link containers */
 .link-container {
+  cursor: pointer;
   margin-bottom: 10px;
 }
 

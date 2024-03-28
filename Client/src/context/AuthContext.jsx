@@ -47,6 +47,13 @@ export const AuthProvider = ({ children }) => {
         credentials: 'include',
       });
       if (response.ok) {
+        // Remove specific fields from local storage
+        localStorage.removeItem('_grecaptcha');
+        localStorage.removeItem('factoryId');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userID');
+  
+        // Set user to null and navigate to login
         setUser(null);
         navigate('/login');
       }
@@ -54,6 +61,7 @@ export const AuthProvider = ({ children }) => {
       console.error("Error logging out", error);
     }
   };
+  
 
   const value = {
     user,

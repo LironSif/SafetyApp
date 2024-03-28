@@ -2,6 +2,7 @@ import Factory from '../models/Factory.js';
 import FactoryDepartment from '../models/Department.js'; // Ensure this path matches your actual file path
 
 export const createMultipleDepartments = async (req, res) => {
+  console.log(req.body)
   const { factoryId, departments } = req.body;
 
   if (!factoryId || !departments || departments.length === 0) {

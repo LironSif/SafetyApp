@@ -1,40 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import SetupFactory from '../../components/FactorySetup/SetupFactory.jsx';
-import YouMustLogin from '../../components/YouMustLogin/YouMustLogin.jsx';
-import Spinner3 from '../../components/Spinner/Spinner3.jsx';
-import { useAuth } from '../../context/AuthContext';
+import React, { useEffect } from "react";
+import SetupFactory from "../../components/FactorySetup/SetupFactory.jsx";
+import YouMustLogin from "../../components/YouMustLogin/YouMustLogin.jsx";
+import { useAuth } from "../../context/AuthContext";
+import Spinner4 from "../../components/Spinner/Spinner3.jsx";
 
 const SetupYourFactory = () => {
-  const { user, isLoading } = useAuth();
-  const [readyToShow, setReadyToShow] = useState(false); // New state to control visibility
+  const { user, refreshUserData, isLoading } = useAuth();
 
   useEffect(() => {
-    // If not loading and user state is checked, set readyToShow to true
-    if (!isLoading && user !== undefined) {
-      setReadyToShow(true);
+    if (!user?.factory) {
+      refreshUserData();
     }
-  }, [isLoading, user]);
+  }, []);
 
-  // Decide what to render based on the user state
+  // Determine what to render based on the user and user.factory state
   const renderContent = () => {
+    // Show spinner when data is loading
+    if (isLoading) {
+      return <Spinner4 />;
+    }
+
+    // If there's no user, prompt to login
     if (!user) {
       return <YouMustLogin />;
-    } else if (!user.factory) {
-      return <div>You have no factory set up. Please set up your factory.</div>;
-    } else {
-      return <SetupFactory />;
     }
+
+    // If there's a user but no factory, show specific message or component
+    if (!user.factory) {
+      return <div>You have no factory set up. Please set up your factory.</div>;
+    }
+
+    // If there's a user and a factory, proceed with the setup
+    return <SetupFactory />;
   };
 
-  if (!readyToShow) {
-    return <Spinner3 />;
-  }
-
-  return (
-    <div>
-      {renderContent()}
-    </div>
-  );
+  return <div>{renderContent()}</div>;
 };
 
 export default SetupYourFactory;

@@ -1,67 +1,162 @@
 .quick-setup {
-  position: relative;
-  padding: 50px; /* Ensure space for the circle and line */
-  width: 50%;
-  
-}
-
-.GenericForm {
-
-  margin-top: 20px;
-  position: relative;
-}
-
-.GenericForm .form-header {
-  position: absolute;
-  left: -38px; /* Adjust based on the circle size to align it outside the form */
-  top: 0;
-}
-
-.circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: gray;
-  color: white;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 20px;
+  width: 800px;
 }
 
-.GenericForm:not(:last-child):after {
-  content: "";
-  position: absolute;
-  left: -25px; /* Align with the center of the circle */
-  top: 30px; /* Start from the bottom of the circle */
-  bottom: -20px; /* Extend slightly beyond the form for continuous lines */
-  border-left: 2px solid gray;
-}
-.circle.success {
-  background-color: blue; 
+.quick-setup-input {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
-.GenericForm.disabled {
-  pointer-events: none;
-  opacity: 0.6;
-}
-.circle.success {
-  background-color: blue; /* Adjust color as needed */
+.quick-setup-input label {
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-.form-success {
-  border-color: blue; /* Adjust color as needed */
+.quick-setup-input input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-.GenericForm.disabled {
-  pointer-events: none;
-  opacity: 0.5;
+.card {
+  width: 100%;
+  max-width: 600px;
+  margin: 10px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: #fff;
 }
 
+.card.success {
+  border-color: #28a745;
+  background-color: #e6f9f2;
+}
+
+.qs-button {
+  padding: 10px 15px;
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.qs-button:hover {
+  background-color: #0056b3;
+}
+
+.qs-button:disabled {
+  background-color: #ccc;
+}
+
+.department-selection {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  max-height: 150px; /* Set a reasonable maximum height */
+}
+
+
+ .selected-departments button {
+  min-height: 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.department-selection button {
+  padding: 5px 10px;
+  margin: 5px;
+  min-height: 20px;
+  border: 2px solid #007bff; /* Blue border for unselected */
+  border-radius: 20px;
+  background-color: #fff; /* White background for unselected */
+  color: #000; /* Black text for unselected */
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
+}
+
+.department-selection button:hover, .selected-departments button:hover {
+  transform: scale(1.1);
+}
+
+.department-selection button.selected, .selected-departments button {
+  background-color: #007bff; /* Blue background for selected */
+  color: #fff; /* White text for selected */
+}
+
+
+.selected-departments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.selected-department {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 15px;
+  background-color: #007bff; /* Blue background for the container of selected department */
+  color: white; /* White text for the content of selected department */
+}
+
+
+.remove-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.error-message, .success-message {
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+}
 @media (max-width: 768px) {
   .quick-setup {
-    position: relative;
-    padding: 50px; /* Ensure space for the circle and line */
-    width: 100%;
-    
+    width: 95%; /* Adjusts width for smaller screens */
+    padding: 15px; /* Slightly reduce padding for more space */
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }}
