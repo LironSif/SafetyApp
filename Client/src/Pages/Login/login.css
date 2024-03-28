@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #FFFFFF; /* Updated as requested */
-  max-height: 100vh;
+ height: 100%;
 }
 
 /* Header and Main Content Styling */

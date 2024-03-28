@@ -8,7 +8,10 @@ import welcomeMessage from "../TypeEffect/Message.js";
 
 const FactoryDetails = () => {
   const factoryId = localStorage.getItem("factoryId");
-  const { data: factory, isLoading: fetchingFactory } = useGetFactoryByIdQuery(factoryId);
+  const { data: factory, isLoading: fetchingFactory } = useGetFactoryByIdQuery(factoryId, {
+    skip: !factoryId,
+  });
+  
   const [updateFactory, { isLoading: updatingFactory, isSuccess, isError, error }] = useUpdateFactoryMutation();
 
   const initialDetails = { name: "", address: "", employeeCount: "" };
@@ -16,6 +19,32 @@ const FactoryDetails = () => {
   const [editStates, setEditStates] = useState({ name: false, address: false, employeeCount: false });
   const [successMessage, setSuccessMessage] = useState("");
 
+
+
+  useEffect(() => {
+    const storedFactoryId = localStorage.getItem("factoryId");
+    if (!storedFactoryId) {
+      // Handle case where factory ID is not set: redirect or show a message
+      console.log("No factory ID found. Redirecting to login or selection page.");
+      // navigate("/login"); Uncomment and use as needed
+    } else {
+      console.log(`Factory ID retrieved: ${storedFactoryId}`);
+
+      // Optionally, if you need to do something with the factoryId here
+    }
+  }, []); // Empty dependency array means this runs once on component mount
+
+
+  useEffect(() => {
+    console.log('Factory ID:', factoryId);
+  }, [factoryId]);
+
+  
+  useEffect(() => {
+    console.log('Fetching Factory:', fetchingFactory);
+  }, [fetchingFactory]);
+  
+  
   useEffect(() => {
     if (factory) {
       setFactoryDetails({
@@ -24,7 +53,7 @@ const FactoryDetails = () => {
         employeeCount: factory.employeeCount?.toString() || "",
       });
     }
-  }, [factory]);
+  }, [factory,]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -59,7 +88,16 @@ const FactoryDetails = () => {
     setEditStates(prev => ({ ...prev, [field]: !prev[field] }));
   };
 
-  if (fetchingFactory) return <Spinner3 />;
+  // if (fetchingFactory) return <Spinner3 />;
+
+
+ if (fetchingFactory) {
+  return <Spinner3 />;
+} else if (isError) {
+  return <div>An error occurred: {error?.data?.message || "Please try again later."}</div>;
+}
+// Continue with normal render if not loading and no error
+
 
   return (
     <div className="card-div">

@@ -66,10 +66,22 @@ const GenericFactoryForm = ({ setup }) => {
       setErrors({}); // Clear any existing errors
     } catch (error) {
       console.error(error);
-      const serverErrorMessage = error.data?.message || error.error || 'An unexpected error occurred. Please try again.';
+      
+      // Assuming 'error.response.data.message' holds the server's error message.
+      // Adjust the path as necessary based on your HTTP request method or library.
+      const errorMessage = error.data?.message;
+      
+      // Check if the error message from the server is "Unauthorized" and set the message accordingly.
+      // Otherwise, use the generic error message or the one provided by the server.
+      const serverErrorMessage = errorMessage === "Unauthorized" 
+        ? 'You must login first.' 
+        : errorMessage || 'An unexpected error occurred. Please try again.';
+      
       setErrors(prev => ({ ...prev, form: serverErrorMessage }));
       setSuccessOperation(null);
     }
+    
+    
   };
   
 
