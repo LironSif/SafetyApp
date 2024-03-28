@@ -5,7 +5,7 @@ import GenericFactoryForm from '../GenericFactoryForm/GenericForm.jsx';
 import GenericDepartmentForm from '../GenericFactoryForm/GenericDepartmentForm.jsx';
 import { formSetup as importedFactoryFormSetup } from '../../Config/factoryFormQuickConfig.js';
 import { deptFormSetup as importedDeptFormSetup } from '../../Config/DeptFormQuickConfig.js';
-import Spinner from '../Spinner/Spinner.jsx';
+import Spinner3 from '../Spinner/Spinner3.jsx';
 import Modal from '../modals/setupModal.jsx';
 import './QuickSetup.css';
 import { setQuickSetupComplete } from '../../redux/slices/FactoryCreationSlice'; // Ensure correct import path
@@ -41,7 +41,7 @@ const QuickSetup = () => {
 
   return (
     <div className="quick-setup">
-      {showSpinner && <Spinner />}
+      {showSpinner && <Spinner3 />}
       {showModal && <Modal onClose={handleCloseModal} onNavigate={handleNavigate} />}
       {!showSpinner && !showModal && (
         <>

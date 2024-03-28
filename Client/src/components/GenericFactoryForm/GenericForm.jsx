@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useCreateFactoryMutation, useUpdateFactoryMutation } from '../../services/factoryApi.js';
 import './GenericForm.css';
-import Spinner from '../Spinner/Spinner.jsx'; // Verify this path matches your spinner component
+import Spinner3 from '../Spinner/Spinner3.jsx'; // Verify this path matches your spinner component
 import { setFactoryId, setFactoryCreated } from '../../redux/slices/FactoryCreationSlice'; // Adjust the path as necessary
 
 const GenericFactoryForm = ({ setup }) => {
@@ -91,7 +91,7 @@ const GenericFactoryForm = ({ setup }) => {
         ))}
         <div className="formButton">
           <button type="submit" disabled={isCreating || isUpdating || successOperation} className={successOperation ? 'button-success' : ''}>
-            {successOperation ? (successOperation === 'create' ? 'Factory Created' : 'Factory Updated') : (isCreating || isUpdating ? <Spinner /> : (setup.operation === 'create' ? 'Create Factory' : 'Update Factory'))}
+            {successOperation ? (successOperation === 'create' ? 'Factory Created' : 'Factory Updated') : (isCreating || isUpdating ? <Spinner3 /> : (setup.operation === 'create' ? 'Create Factory' : 'Update Factory'))}
           </button>
         </div>
       </form>

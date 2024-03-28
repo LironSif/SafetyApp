@@ -6,17 +6,20 @@ import { useAuth } from '../../context/AuthContext';
 import QuickSetup from '../../components/FactorySetup/QuickSetup.jsx';
 import { useGetDepartmentsQuery } from '../../services/departmentApi';
 import { setQuickSetupComplete } from '../../redux/slices/FactoryCreationSlice';
+import Spinner3 from '../../components/Spinner/Spinner3.jsx';
 
 
 const Home = () => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, refreshUserData } = useAuth();
   const { data: departments, isSuccess } = useGetDepartmentsQuery();
   const dispatch = useDispatch();
   const isQuickSetupComplete = useSelector((state) => state.factoryCreation.quickSetupComplete);
-console.log(isQuickSetupComplete)
+
+if(!user){
+  refreshUserData()
+}
   useEffect(() => {
-    // Assuming that having at least one department signifies completion
-    if (isSuccess && user.factoryId) {
+    if (isSuccess && user?.factory) {
       dispatch(setQuickSetupComplete(true));
     } else {
       dispatch(setQuickSetupComplete(false));
@@ -24,7 +27,7 @@ console.log(isQuickSetupComplete)
   }, [departments, isSuccess, dispatch]);
 
   if (isLoading || !isSuccess) {
-    return <div>Loading user information...</div>;
+    return <div><Spinner3/></div>;
   }
 
   return (
