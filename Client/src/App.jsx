@@ -67,9 +67,9 @@ const App = () => {
 
   return (
     <div className="app">
-      {!shouldHideNavBars && showMobileNavBar && <MobileNavBar onToggle={toggleFullNavBarVisibility} />}
       {!shouldHideNavBars && showFullNavBar && <NavBar ref={navBarRef} />}
       <div className="page">
+      {!shouldHideNavBars && showMobileNavBar && <MobileNavBar onToggle={toggleFullNavBarVisibility} />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

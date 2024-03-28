@@ -2,7 +2,7 @@
   display: flex; /* Use flexbox for layout */
   justify-content: space-between; /* Spread children to left and right */
   align-items: center; /* Center children vertically */
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   width: 100%; /* Ensure it spans the full width of the viewport */

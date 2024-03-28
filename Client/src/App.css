@@ -5,65 +5,64 @@
 }
 
 @font-face {
-  font-family: 'EuclidSquare';
-  src: url('../src/assets/Fonts/EuclidSquare-Regular.woff2') format('woff2'),
-       url('../src/assets/Fonts/EuclidSquare-Regular.woff') format('woff');
+  font-family: "EuclidSquare";
+  src: url("../src/assets/Fonts/EuclidSquare-Regular.woff2") format("woff2"),
+    url("../src/assets/Fonts/EuclidSquare-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
 .regular-text {
-  font-family: 'EuclidSquare', 'Inter', sans-serif;
+  font-family: "EuclidSquare", "Inter", sans-serif;
   font-weight: 400; /* This matches the font-weight for the regular font variant */
 }
 
-
 @font-face {
-  font-family: 'EuclidSquare';
-  src: url('../src/assets/Fonts/EuclidSquare-Bold.woff2') format('woff2');
+  font-family: "EuclidSquare";
+  src: url("../src/assets/Fonts/EuclidSquare-Bold.woff2") format("woff2");
   font-weight: 600; /* Use 600 for bold if 500 is for semibold, adjust as necessary */
   font-style: normal;
 }
 
 .bold-text {
-  font-family: 'EuclidSquare', 'Inter', sans-serif;
+  font-family: "EuclidSquare", "Inter", sans-serif;
   font-weight: 600; /* Match the font-weight specified in the @font-face */
 }
 
 @font-face {
-  font-family: 'Inter';
-  src: url('../src/assets/Fonts/Inter.woff2') format('woff2'),
-       url('../src/assets/Fonts/Inter.woff') format('woff');
+  font-family: "Inter";
+  src: url("../src/assets/Fonts/Inter.woff2") format("woff2"),
+    url("../src/assets/Fonts/Inter.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
 
-
 body {
   width: 100%;
-  min-height: 100vh;
-  background-color: #FFFFFF;
-  font-family: 'EuclidSquare', 'Inter', sans-serif;
+  max-height: 100vh;
+  background-color: #ffffff;
+  font-family: "EuclidSquare", "Inter", sans-serif;
+  /* border: 1px solid blue; */
 }
 
 #root {
   width: 100%;
-  height: 100%;
- display: flex;
+  max-height: 100vh;
+  display: flex;
 }
 
 .app {
   width: 100%;
-  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
 }
 
 .page {
-  /* margin-left: 250px; Adjust so it matches the sidebar width */
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
   overflow-y: auto; /* Enable scrolling for the main content */
-  height: 100vh; /* Optional: to ensure it fills the viewport vertically */
-  /* width: calc(100% - 250px); Take up remaining width */
+  height: 100%; /* Optional: to ensure it fills the viewport vertically */
   width: 100%;
-  background-color: #F9FAFB;
+  background-color: #f9fafb;
 }
-

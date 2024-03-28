@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCreateDepartmentMutation } from '../../services/departmentApi';
 import './GenericDepartmentForm.css';
-import Spinner from '../Spinner/Spinner.jsx'; // Ensure this path matches your spinner component
+import Spinner3 from '../Spinner/Spinner.jsx'; // Ensure this path matches your spinner component
 import { setDepartmentsCreated } from '../../redux/slices/FactoryCreationSlice';
 const GenericDepartmentForm = ({ setup }) => {
     const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const GenericDepartmentForm = ({ setup }) => {
       </div>
       <div className="formButton">
         <button onClick={handleSubmit} disabled={isCreating || successOperation}>
-          {isCreating ? <Spinner /> : (successOperation ? 'Departments Created' : 'Create Departments')}
+          {isCreating ? <Spinner3 /> : (successOperation ? 'Departments Created' : 'Create Departments')}
         </button>
       </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
