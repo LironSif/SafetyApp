@@ -6,9 +6,11 @@ const Modal = ({ onClose }) => {
     const navigate = useNavigate();
 
     const handleNavigate = () => {
+        console.log('Navigating to setup...');
         navigate('/getting-started/setup');
         onClose(); // Optionally close the modal upon navigation
     };
+    
 
     return (
         <div className="modal-backdrop" onClick={onClose}>
