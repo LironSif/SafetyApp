@@ -29,6 +29,10 @@
     justify-content: center;
     align-items: center;
     font-weight: 600;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis if text is too long */
+    max-width: 100%; /* Ensure it doesn't exceed its parent container */
   }
   
  
