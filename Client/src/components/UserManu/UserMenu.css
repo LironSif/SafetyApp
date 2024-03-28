@@ -1,6 +1,5 @@
 .user-menu {
   position: relative;
-  z-index: 1000;
 }
 
 .user-button {
@@ -14,6 +13,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 4px;
+  border: 1px solid rgb(0, 86, 179);
 }
 
 .user-button:hover {
@@ -28,9 +29,9 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   width: 200px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a legible font */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Use a legible font */
   color: #333; /* Dark text for readability */
 }
 
@@ -59,16 +60,39 @@
   background-color: #f0f0f0; /* Subtle hover effect */
 }
 
-.icon, .icon2 {
+.icon,
+.icon2 {
   width: 20px;
   height: 20px;
   vertical-align: middle; /* Align icons with the text vertically */
 }
 
 /* Media query to adjust dropdown position on smaller screens */
+/* @media (max-width: 950px) {
+  .user-menu  {
+    left: 0; 
+        right: 10; }
+ */
 @media (max-width: 950px) {
-  .menu-dropdown {
-    left: auto; /* Override left position */
-    right: 0; /* Position to the right */
+  .user-button {
+    background-color: #333;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 50px;
+    margin-left: 4px;
+    height: 30px;
+    border: 1px solid white;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 4px;
+  }
+  .icon2 {
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle; /* Align icons with the text vertically */
   }
 }

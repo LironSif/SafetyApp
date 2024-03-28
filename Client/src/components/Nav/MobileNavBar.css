@@ -1,28 +1,19 @@
 .mobile-nav-bar {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Spread children to left and right */
-  align-items: center; /* Center children vertically */
-  /* position: fixed; */
-  top: 0;
-  left: 0;
-  width: 100%; /* Ensure it spans the full width of the viewport */
-  padding: 10px 20px; /* Add some padding around */
-  background-color: #333; /* Example background color */
-  color: white; /* Example text color */
-  z-index: 1000; /* Ensure it's above other content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  z-index: 1000;
+  border: 1px solid rgb(215, 211, 211);
 }
 
-/* Adjust button styling */
 .mobile-nav-bar button {
-  background-color: transparent; /* Remove button background */
-  border: none; /* Remove button border */
-  color: inherit; /* Inherit color from parent */
-  font-size: 24px; /* Adjust size as needed */
-  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  flex-shrink: 0; /* Prevent the button from shrinking */
 }
 
-@media (max-width: 950px) {
-  .mobile-nav-bar {
-    display: flex; /* Ensure it's displayed in mobile view */
-  }
+.nav-user-container {
+  flex-grow: 1; /* Allow <NavUser/> to take up remaining space */
 }

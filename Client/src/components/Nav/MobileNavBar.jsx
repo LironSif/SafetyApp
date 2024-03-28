@@ -4,9 +4,11 @@ import './MobileNavBar.css'
 import NavUser from './NavUser';
 const MobileNavBar = ({ onToggle }) => {
   return (
+    <div className="nav-user-container">
     <div className="mobile-nav-bar">
       <button onClick={onToggle}>☰</button>
       <NavUser/>
+    </div>
     </div>
   );
 };
