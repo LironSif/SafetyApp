@@ -1,18 +1,24 @@
-import React  from 'react';
-import './setupModal.css'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './setupModal.css';
 
+const Modal = ({ onClose }) => {
+    const navigate = useNavigate();
 
+    const handleNavigate = () => {
+        navigate('/getting-started/setup');
+        onClose(); // Optionally close the modal upon navigation
+    };
 
-const Modal  = ({ onClose, onNavigate }) => {
     return (
-      <div className="modal-backdrop" onClick={onClose}>
-        <div className="modal-content" onClick={e => e.stopPropagation()}> {/* Prevents click inside the modal from closing it */}
-          <p>Hi Inspector, you successfully created a factory. You can keep editing your factory in the setup your factory section.</p>
-          <button onClick={onNavigate}>Take me there</button>
-          <button onClick={onClose}>Close</button>
+        <div className="modal-backdrop" onClick={onClose}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <p>Hi Inspector, you successfully created a factory. You can keep editing your factory in the setup your factory section.</p>
+                <button className="modal-navigate-btn" onClick={handleNavigate}>Take me there</button>
+                <button className="modal-close-btn" onClick={onClose}>Not now</button>
+            </div>
         </div>
-      </div>
     );
-  };
-  
-  export default Modal 
+};
+
+export default Modal;

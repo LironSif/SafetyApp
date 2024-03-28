@@ -1,14 +1,20 @@
 import React from 'react'; // Import React
-import { Link, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // Import useNavigate instead of Link
 import { links, buttomLinks } from "../../Constants/Links";
 import NavUser from "./NavUser";
 import './NavBar.css';
 
-const Sidebar = React.forwardRef((props, ref) => { // Use React.forwardRef to wrap your function component
+const Sidebar = React.forwardRef((props, ref) => {
   const location = useLocation();
+  const navigate = useNavigate(); // Create a navigate function instance
+
+  // Function to handle navigation
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
 
   return (
-    <div className="sidebar" ref={ref}> {/* Attach the ref to the root element */}
+    <div className="sidebar" ref={ref}>
       <div className="user-bar">
         <div className="warraper">
           <NavUser />
@@ -19,16 +25,18 @@ const Sidebar = React.forwardRef((props, ref) => { // Use React.forwardRef to wr
         <div className="warraper">
           {links.map((link, index) => (
             <div key={index} className="link-container">
-              <Link to={link.path} className="main-link">
+              {/* Replace Link with div and onClick event */}
+              <div className="main-link" onClick={() => handleNavigation(link.path)}>
                 <img src={link.icon} alt="" className="icon" />
                 {link.name}
-              </Link>
+              </div>
               {link.subLinks && link.subLinks.map((subLink, subIndex) => (
                 <div
                   key={subIndex}
                   className={`sub-link ${location.pathname === subLink.path ? "active" : ""}`}
+                  onClick={() => handleNavigation(subLink.path)} // Add onClick to navigate
                 >
-                  <Link to={subLink.path}>{subLink.name}</Link>
+                  {subLink.name}
                 </div>
               ))}
             </div>
@@ -40,10 +48,11 @@ const Sidebar = React.forwardRef((props, ref) => { // Use React.forwardRef to wr
         <div className="warraper">
           {buttomLinks.map((link, index) => (
             <div key={index} className="link-container">
-              <Link to={link.path} className="main-link">
+              {/* Replace Link with div and onClick event */}
+              <div className="main-link" onClick={() => handleNavigation(link.path)}>
                 <img src={link.icon} alt="" className="icon" />
                 {link.name}
-              </Link>
+              </div>
             </div>
           ))}
         </div>
