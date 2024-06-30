@@ -31,8 +31,6 @@ const chemicalSchema = new Schema({
   }],
 }, { _id: false });
 
-const Chemical = model('Chemical', chemicalSchema);
-
 const RiskSchema = new Schema({
   name: String,
   level: String,
@@ -51,8 +49,11 @@ const FactoryDepartmentSchema = new Schema({
   employees: [{ type: Schema.Types.ObjectId, ref: 'FactoryEmployee' }],
   risks: [RiskSchema],
   equipment: [EquipmentSchema],
-  // Store chemicals directly as embedded documents
   chemicals: [chemicalSchema],
+  noise: {
+    measurement: String,
+    lastCheckDate: Date,
+  },
   factoryId: { type: Schema.Types.ObjectId, ref: 'Factory', required: true },
 });
 

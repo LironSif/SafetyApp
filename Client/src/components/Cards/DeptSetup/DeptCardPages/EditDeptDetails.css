@@ -2,11 +2,9 @@
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 8px;
-  
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   margin: auto;
-
 }
 
 .edit-dept-details h2 {
@@ -82,6 +80,9 @@
   font-weight: bold;
   text-transform: uppercase;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .action-btn.previous {
@@ -104,13 +105,23 @@
   transform: translateY(-2px);
 }
 
-option{
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px; /* Adjust based on the spinner size */
+  height: 20px; /* Adjust based on the spinner size */
+}
+
+option {
   color: #333;
 }
+
 .edit-dept-details select[multiple] {
   height: auto; /* Adjust based on your design needs */
   overflow: auto;
 }
+
 #employeesSelect {
   display: flex;
   flex-direction: column;
@@ -122,18 +133,15 @@ option{
   margin-top: 5px;
 }
 
-/* #employeesSelect div {
-  margin-bottom: 5px;
-} */
-
 #employeesSelect label {
   margin-left: 5px;
 }
-.add-employee-div{
+
+.add-employee-div {
   display: flex;
   justify-content: space-between;
 }
 
-.span{
+.span {
   margin-bottom: 10px;
 }

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { chemicals } from '../../Constants/chemicals'; // Adjust the import path as necessary
-import './AddChemicalToDepartment.css'; // Make sure you have this CSS file
+import './AddChemicalToDepartment.css'; 
 
 const AddChemicalToDepartment = ({ onChemicalsAdded }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredChemicals, setFilteredChemicals] = useState([]);
-  const [selectedChemicals, setSelectedChemicals] = useState({});
+  const [selectedChemicals, setSelectedChemicals] = useState([]);
 
   useEffect(() => {
     const filterResults = Object.entries(chemicals).filter(([unNumber, { Name }]) =>
@@ -20,24 +20,24 @@ const AddChemicalToDepartment = ({ onChemicalsAdded }) => {
   };
 
   const handleSelectChemical = (UNNumber) => {
-    setSelectedChemicals(prev => ({ ...prev, [UNNumber]: chemicals[UNNumber] }));
+    if (!selectedChemicals.find(chemical => chemical.UNNumber === UNNumber)) {
+      setSelectedChemicals(prev => [...prev, { UNNumber, ...chemicals[UNNumber] }]);
+    } else {
+      alert('Chemical already selected');
+    }
     setSearchTerm('');
     setFilteredChemicals([]);
   };
 
   const handleRemoveChemical = (UNNumber) => {
-    setSelectedChemicals(prev => {
-      const newState = { ...prev };
-      delete newState[UNNumber];
-      return newState;
-    });
+    setSelectedChemicals(prev => prev.filter(chemical => chemical.UNNumber !== UNNumber));
   };
 
   const handleAddToDepartment = () => {
     console.log("Adding chemicals to department:", selectedChemicals);
     onChemicalsAdded(selectedChemicals);
-    alert(`${Object.keys(selectedChemicals).length} chemical(s) added to department.`);
-    setSelectedChemicals({}); // Optionally clear the selection after adding
+    alert(`${selectedChemicals.length} chemical(s) added to department.`);
+    // setSelectedChemicals([]); 
   };
 
   return (
@@ -61,14 +61,14 @@ const AddChemicalToDepartment = ({ onChemicalsAdded }) => {
         </ul>
       )}
       <div className="selected-chemicals-container">
-        {Object.entries(selectedChemicals).map(([UNNumber, { Name }]) => (
+        {selectedChemicals.map(({ UNNumber, Name }) => (
           <div key={UNNumber} className="selected-chemical">
             {Name} ({UNNumber})
             <button onClick={() => handleRemoveChemical(UNNumber)} className="remove-chemical-btn">X</button>
           </div>
         ))}
       </div>
-      {Object.keys(selectedChemicals).length > 0 && (
+      {selectedChemicals.length > 0 && (
         <button onClick={handleAddToDepartment} className="add-to-department-btn">
           Add to Department
         </button>
