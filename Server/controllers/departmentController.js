@@ -137,8 +137,36 @@ export const getAllDepartments = async (req, res) => {
 // Update a department by ID
 export const updateDepartment = async (req, res) => {
   try {
-    const department = await FactoryDepartment.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const department = await FactoryDepartment.findById(req.params.id);
     if (!department) return res.status(404).json({ message: 'Department not found' });
+
+    // Update department fields
+    department.manager = req.body.manager || department.manager;
+    department.employees = req.body.employees || department.employees;
+    department.noise = req.body.noise || department.noise;
+
+    // Update chemicals and handle duplicates
+    req.body.chemicals.forEach((newChemical) => {
+      const existingChemicalIndex = department.chemicals.findIndex(
+        (chemical) => chemical.UNNumber === newChemical.UNNumber
+      );
+      if (existingChemicalIndex === -1) {
+        department.chemicals.push(newChemical);
+      } else {
+        department.chemicals[existingChemicalIndex] = newChemical;
+      }
+    });
+
+    // Update risks based on presence of chemicals and noise
+    department.risks = [];
+    if (department.chemicals.length > 0) {
+      department.risks.push({ name: 'Chemical Risk', level: 'High', mitigationMeasures: ['Use PPE', 'Regular Monitoring'] });
+    }
+    if (department.noise && department.noise.measurement) {
+      department.risks.push({ name: 'Noise Risk', level: 'Medium', mitigationMeasures: ['Use Ear Protection', 'Regular Noise Monitoring'] });
+    }
+
+    await department.save();
     res.json(department);
   } catch (err) {
     res.status(500).json({ message: err.message });

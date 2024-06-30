@@ -32,11 +32,66 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   background-color: #fff;
+  position: relative; /* Needed for step indicator positioning */
 }
 
 .card.success {
   border-color: #28a745;
   background-color: #e6f9f2;
+}
+
+.card:disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.step{
+  border-left:1px solid #007bff;
+}
+
+.border{
+  display: flex;
+  /* justify-content: center; */
+  width: 100%;
+  border-left: 3px solid #ccc;;
+}
+.border2{
+  display: flex;
+  width: 100%;
+}
+
+.step-indicator {
+  position: relative;
+  top: -10px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  color: white;
+  font-weight: bold;
+  /* z-index: 1000; */
+}
+/* .step-indicator1 {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  color: white;
+  font-weight: bold;
+} */
+
+.step-complete {
+  background-color: #007bff; /* Blue for completed steps */
 }
 
 .qs-button {
@@ -60,49 +115,17 @@
 
 .department-selection {
   display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  flex-wrap: wrap;
   gap: 10px;
+  margin-top: 20px;
   margin-bottom: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 5px;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  overflow-y: auto; /* Enable vertical scrolling if needed */
-  max-height: 150px; /* Set a reasonable maximum height */
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 150px;
 }
-
-
- .selected-departments button {
-  min-height: 20px;
-  border: none;
-  border-radius: 20px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.department-selection button {
-  padding: 5px 10px;
-  margin: 5px;
-  min-height: 20px;
-  border: 2px solid #007bff; /* Blue border for unselected */
-  border-radius: 20px;
-  background-color: #fff; /* White background for unselected */
-  color: #000; /* Black text for unselected */
-  cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
-}
-
-.department-selection button:hover, .selected-departments button:hover {
-  transform: scale(1.1);
-}
-
-.department-selection button.selected, .selected-departments button {
-  background-color: #007bff; /* Blue background for selected */
-  color: #fff; /* White text for selected */
-}
-
 
 .selected-departments {
   display: flex;
@@ -113,20 +136,29 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   max-height: 150px;
+  min-height: 50px;
   overflow-y: auto;
 }
 
+.added-departments{
+  font-weight: bold;
+}
 .selected-department {
   display: flex;
   align-items: center;
   padding: 5px 10px;
   margin: 5px;
-  border-radius: 15px;
-  background-color: #007bff; /* Blue background for the container of selected department */
-  color: white; /* White text for the content of selected department */
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  margin-top: 10px;
 }
-
-
+.department-btn {
+  padding: 5px;
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  background-color: transparent;
+}
 .remove-btn {
   background-color: #dc3545;
   color: white;
@@ -136,14 +168,18 @@
   margin-left: 10px;
   cursor: pointer;
 }
-
+.border-success {
+  border-left-color: #007bff; /* Blue color for success */
+}
 .error-message, .success-message {
   text-align: center;
   padding: 10px;
   border-radius: 5px;
   margin-top: 10px;
 }
-
+.step-indicator.success {
+  background-color: #007bff; /* Blue color for success */
+}
 .error-message {
   background-color: #f8d7da;
   color: #721c24;
@@ -153,10 +189,16 @@
   background-color: #d4edda;
   color: #155724;
 }
+.department-btn.selected {
+  background-color: #007bff; /* Blue color for selected state */
+  color: white;
+  border: none;
+}
 @media (max-width: 950px) {
   .quick-setup {
-    width: 95%; /* Adjusts width for smaller screens */
-    padding: 15px; /* Slightly reduce padding for more space */
+    width: 95%;
+    padding: 15px;
     margin: 20px auto;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }}
+  }
+}

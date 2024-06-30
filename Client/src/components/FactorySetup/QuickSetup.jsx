@@ -6,6 +6,8 @@ import { useAuth } from "../../context/AuthContext.jsx";
 import Spinner3 from "../Spinner/Spinner3.jsx";
 import Modal from "../modals/setupModal.jsx";
 import "./QuickSetup.css";
+import MessageWithTypingEffect from "../TypeEffect/TypeEffect.jsx";
+import welcomeMessage from "../TypeEffect/Message2.js";
 
 const QuickSetup = () => {
   const navigate = useNavigate();
@@ -17,6 +19,7 @@ const QuickSetup = () => {
   const [factoryDetails, setFactoryDetails] = useState({ factoryName: "", factoryAddress: "" });
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
   const [factoryErrorMessage, setFactoryErrorMessage] = useState("");
   const [departmentErrorMessage, setDepartmentErrorMessage] = useState("");
   const [factorySuccessMessage, setFactorySuccessMessage] = useState("");
@@ -29,11 +32,10 @@ const QuickSetup = () => {
       localStorage.setItem("factoryId", factoryData._id);
       setFactorySuccessMessage("Factory successfully created.");
     }
-    
+
     if (isFactorySuccess && isDepartmentSuccess) {
       setDepartmentSuccessMessage("Departments successfully created.");
       setShowModal(true);
- 
     }
 
     if (factoryError) {
@@ -72,21 +74,25 @@ const QuickSetup = () => {
 
   const handleSubmitFactory = async (e) => {
     e.preventDefault();
-    setFactoryErrorMessage(""); // Clear any previous error message
+    setFactoryErrorMessage("");
+    setShowSpinner(true);
     if (!validateFactoryDetails()) {
+      setShowSpinner(false);
       return;
     }
     try {
       await createFactory({ ...factoryDetails, userId: user._id });
     } finally {
-      setShowSpinner(false); // Missing setShowSpinner(true) before the try block
+      setShowSpinner(false);
     }
   };
 
   const handleSubmitDepartments = async () => {
-    setDepartmentErrorMessage(""); // Clear any previous error message
+    setDepartmentErrorMessage("");
+    setShowSpinner(true);
     const factoryId = localStorage.getItem("factoryId");
     if (!factoryId || selectedDepartments.length === 0) {
+      setShowSpinner(false);
       setDepartmentErrorMessage("No departments selected or missing factory ID.");
       return;
     }
@@ -97,75 +103,85 @@ const QuickSetup = () => {
         departments: selectedDepartments,
       });
     } finally {
-      setShowSpinner(false); // setShowSpinner(true) should also be set before the try block
+      setShowSpinner(false);
     }
   };
 
   const handleModalClose = () => {
     setShowModal(false);
-    navigate('/'); // Navigate to the home page after closing the modal
+    navigate('/getting-started/setup');
   };
 
-  // Show spinner when any action is being processed
   if (isCreatingFactory || isCreatingDepartment) {
     return <Spinner3 />;
   }
 
   return (
     <div className="quick-setup">
-      <div className={`card ${isFactorySuccess ? "success" : ""}`}>
-        <h2>Setup Your Factory</h2>
-        <form onSubmit={handleSubmitFactory}>
-          <div className="quick-setup-input">
-          <label>Factory Name</label>
-          <input type="text" name="factoryName" value={factoryDetails.factoryName} onChange={handleFactoryDetailsChange} placeholder="Factory Name" />
-          </div>
-          <div className="quick-setup-input">
-          <label>Factory Address</label>
-          <input type="text" name="factoryAddress" value={factoryDetails.factoryAddress} onChange={handleFactoryDetailsChange} placeholder="Factory Address" />
-          </div>
-          <button type="submit" className="qs-button" disabled={isCreatingFactory || isFactorySuccess}>
-            {isCreatingFactory ? "Creating..." : "Create Factory"}
-          </button>
-        </form>
-        {factorySuccessMessage && <p className="success-message">{factorySuccessMessage}</p>}
-        {factoryErrorMessage && <p className="error-message">{factoryErrorMessage}</p>}
+        <div className="card-msg">
+        <MessageWithTypingEffect message={welcomeMessage} />
       </div>
-
-      <div className={`card ${isDepartmentSuccess ? "success" : ""}`}>
-        <h2>Select Departments</h2>
-        <div className="quick-setup-input">
-        <label>select departments</label>
+      <div className={`border ${isFactorySuccess ? "border-success" : ""}`}>
+        <div className={`step-indicator ${isFactorySuccess ? "success" : ""}`}>
+          {isFactorySuccess ? <div className="step-complete">1</div> : <div className="step-pending">1</div>}
         </div>
-        <div className="department-selection">
-          {preExistingDepartments.map((dept, index) => (
-            <button key={index} onClick={() => handleSelectDepartment(dept)} className={`department-btn ${selectedDepartments.includes(dept) ? "selected" : ""}`}>
-              {dept}
-            </button>
-          ))}
-        </div>
-        <div className="quick-setup-input">
-        <label>selected departments</label>
-        </div>
-        <div className="selected-departments">
-          {selectedDepartments.map(dept => (
-            <div key={dept} className="selected-department">
-              {dept} <button className="remove-btn" onClick={() => handleRemoveDepartment(dept)}>X</button>
+  
+        <div className={`card ${isFactorySuccess ? "success" : ""}`}>
+          <h2>Setup Your Factory</h2>
+          <form onSubmit={handleSubmitFactory}>
+            <div className="quick-setup-input">
+              <label>Factory Name</label>
+              <input type="text" name="factoryName" value={factoryDetails.factoryName} onChange={handleFactoryDetailsChange} placeholder="Factory Name" disabled={isCreatingFactory || isFactorySuccess} />
             </div>
-          ))}
+            <div className="quick-setup-input">
+              <label>Factory Address</label>
+              <input type="text" name="factoryAddress" value={factoryDetails.factoryAddress} onChange={handleFactoryDetailsChange} placeholder="Factory Address" disabled={isCreatingFactory || isFactorySuccess} />
+            </div>
+            <button type="submit" className="qs-button" disabled={isCreatingFactory || isFactorySuccess}>
+              {isCreatingFactory ? "Creating..." : "Create Factory"}
+            </button>
+          </form>
+          {factorySuccessMessage && <p className="success-message">{factorySuccessMessage}</p>}
+          {factoryErrorMessage && <p className="error-message">{factoryErrorMessage}</p>}
         </div>
-        <button onClick={handleSubmitDepartments} className="qs-button" disabled={isCreatingDepartment || isDepartmentSuccess}>
-          {isCreatingDepartment ? "Creating..." : isDepartmentSuccess ? "Departments Created" : "Create Departments"}
-        </button>
-        {departmentErrorMessage && <p className="error-message">{departmentErrorMessage}</p>}
-        {departmentSuccessMessage && <p className="success-message">{departmentSuccessMessage}</p>}
       </div>
-
+  
+      <div className={`border2 ${isDepartmentSuccess ? "border-success" : ""}`}>
+        <div className={`step-indicator ${isDepartmentSuccess ? "success" : ""}`}>
+          {isDepartmentSuccess ? <div className="step-complete">2</div> : <div className="step-pending">2</div>}
+        </div>
+        <div className={`card ${isDepartmentSuccess ? "success" : ""}`}>
+          <h2>Select Departments</h2>
+          <div className="department-selection">
+            {preExistingDepartments.map((dept, index) => (
+              <button key={index} onClick={() => handleSelectDepartment(dept)}
+                      className={`department-btn ${selectedDepartments.includes(dept) ? "selected" : ""}`}>
+                {dept}
+              </button>
+            ))}
+          </div>
+          <label className="added-departments">Selected Departments</label>
+          <div className="selected-departments">
+            {selectedDepartments.map(dept => (
+              <div key={dept} className="selected-department">
+                {dept} <button className="remove-btn" onClick={() => handleRemoveDepartment(dept)}>X</button>
+              </div>
+            ))}
+          </div>
+          <button onClick={handleSubmitDepartments} className="qs-button" disabled={isCreatingDepartment || isDepartmentSuccess}>
+            {isCreatingDepartment ? "Creating..." : isDepartmentSuccess ? "Departments Created" : "Create Departments"}
+          </button>
+          {departmentErrorMessage && <p className="error-message">{departmentErrorMessage}</p>}
+          {departmentSuccessMessage && <p className="success-message">{departmentSuccessMessage}</p>}
+        </div>
+      </div>
+  
       {showModal && (
         <Modal onClose={handleModalClose} />
       )}
     </div>
   );
+  
 };
 
 export default QuickSetup;

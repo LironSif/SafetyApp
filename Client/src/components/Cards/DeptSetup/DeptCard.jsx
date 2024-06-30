@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DeptDetailsView from '../DeptSetup/DeptCardPages/DeptDetailsView'; // New component for displaying details
 import DeptEditView from '../DeptSetup/DeptCardPages/EditDeptDetails'; // New component for editing details
 import './DeptSetupCard.css'
+
 const DeptCard = ({ department }) => {
   const [currentPage, setCurrentPage] = useState('details'); // 'details' or 'edit'
 
