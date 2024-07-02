@@ -1,8 +1,23 @@
+.chemicals-container {
+  padding: 20px;
+  font-family: "Euclid Square", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .chemical-details {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
+  justify-content: center;
 }
 
 .department-card {
@@ -12,10 +27,11 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: calc(33.33% - 40px); /* Three cards per row */
+  max-height: 70vh;
   box-sizing: border-box;
   margin-bottom: 20px;
-  height: 80vh; /* Set height to 80vh */
-  overflow-y: auto; /* Enable vertical scrolling */
+  height: auto; /* Adjust height to fit content */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
 }
 
 .department-card h3 {

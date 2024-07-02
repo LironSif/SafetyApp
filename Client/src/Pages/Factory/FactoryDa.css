@@ -1,83 +1,107 @@
+.factory-da-container {
+  padding: 20px;
+  font-family: "Euclid Square", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.color-explanation {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.color-explanation p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-explanation .risk-circle {
+  margin-right: 10px;
+}
+
 .factory-details {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* Center the cards horizontally */
-  padding: 20px;
-  background-color: #f0f2f5;
+  justify-content: center;
 }
 
-.department-cards {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+.department-card2 {
+  border: 1px solid #ddd;
   padding: 20px;
+  border-radius: 8px;
   width: 300px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #f9f9f9;
+  height: auto; /* Set to auto for dynamic content */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.department-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+.noise-details {
+  margin-top: 10px;
 }
 
-.department-card h3 {
-  margin: 0 0 10px;
-  color: #333;
+.progress-bar-container {
+  background-color: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  height: 10px;
+  margin-top: 5px;
+  position: relative;
 }
 
-.department-card p {
-  margin: 5px 0;
-  color: #666;
+.progress-bar-gray {
+  background-color: rgba(200, 200, 200, 0.5);
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.progress-bar-blue {
+  background-color: #0000ff;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .risk-level-container {
+  margin-top: 20px;
   display: flex;
   align-items: center;
-  margin: 10px 0;
 }
 
 .risk-text {
   margin-right: 10px;
-  font-weight: bold;
-  color: #333;
 }
 
 .risk-circle {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+  background-color: #ccc;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-weight: bold;
-  color: white;
-}
-
-.risk-circle.yellow {
-  background-color: #ffc107;
+  align-items: center;
 }
 
 .risk-circle.red {
-  background-color: #dc3545;
+  background-color: red;
+}
+
+.risk-circle.yellow {
+  background-color: yellow;
 }
 
 .employee-list {
-  max-height: 100px;
-  overflow-y: auto;
   margin-top: 10px;
-  padding: 5px;
-  background-color: #e9ecef;
-  border-radius: 4px;
 }
 
 .employee-list p {
   margin: 0;
-  padding: 2px 0;
-}
-
-@media (max-width: 768px) {
-  .department-card {
-    width: 100%;
-  }
 }
