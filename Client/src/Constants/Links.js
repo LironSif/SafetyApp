@@ -13,11 +13,11 @@ import con from "../assets/icons/const.svg";
 export const links = [
   {
     name: "Getting Started",
-    path: "/getting-started/setup",
+    path: "/getting-started/Tutorial",
     icon: start,
     subLinks: [
+      { name: "Tutorial", path: "/getting-started/Tutorial" },
       { name: "Setup your Factory", path: "/getting-started/setup" },
-      { name: "Documentation", path: "/getting-started/documentation" },
     ],
   },
   {

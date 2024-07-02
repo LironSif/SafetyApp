@@ -1,34 +1,57 @@
 import React from 'react';
 import { useGetDepartmentsByFactoryIdQuery } from '../../services/departmentApi';
+import { useAuth } from '../../context/AuthContext';
+import YouMustLogin from '../../components/YouMustLogin/YouMustLogin.jsx';
+import Spinner4 from '../../components/Spinner/Spinner3.jsx';
 import './FactoryDa.css';
 
 const FactoryDa = ({ factoryId }) => {
-  const { data: departments, error, isLoading } = useGetDepartmentsByFactoryIdQuery(factoryId);
+  const { user, refreshUserData, isLoading: authLoading } = useAuth();
+  const { data: departments, error, isLoading: departmentsLoading } = useGetDepartmentsByFactoryIdQuery(factoryId);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading departments: {error.toString()}</div>;
+  React.useEffect(() => {
+    if (!user) {
+      refreshUserData();
+    }
+  }, [user, refreshUserData]);
 
-  return (
-    <div className="factory-details">
-      {departments.map(department => (
-        <div className="department-card" key={department._id}>
-          <h3>{department.name}</h3>
-          <p>Employees: {department.employees.length}</p>
-          <div className="risk-level-container">
-            <span className="risk-text">Risk Level</span>
-            <div className={`risk-circle ${getRiskClass(department.risks)}`}>
-              {department.risks.length}
+  const renderContent = () => {
+    if (authLoading || departmentsLoading) {
+      return <Spinner4 />;
+    }
+
+    if (!user) {
+      return <YouMustLogin />;
+    }
+
+    if (!departments || error) {
+      return <div>Error loading departments: {error ? error.toString() : 'No departments found.'}</div>;
+    }
+
+    return (
+      <div className="factory-details">
+        {departments.map(department => (
+          <div className="department-cards" key={department._id}>
+            <h3>{department.name}</h3>
+            <p>Employees: {department.employees.length}</p>
+            <div className="risk-level-container">
+              <span className="risk-text">Risk Level</span>
+              <div className={`risk-circle ${getRiskClass(department.risks)}`}>
+                {department.risks.length}
+              </div>
+            </div>
+            <div className="employee-list">
+              {department.employees.map(employee => (
+                <p key={employee._id}>{employee.email}</p>
+              ))}
             </div>
           </div>
-          <div className="employee-list">
-            {department.employees.map(employee => (
-              <p key={employee._id}>{employee.email}</p>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  );
+        ))}
+      </div>
+    );
+  };
+
+  return <div>{renderContent()}</div>;
 };
 
 const getRiskClass = (risks) => {

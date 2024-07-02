@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from '../../services/userApi';
 import { factoryApi } from '../../services/factoryApi';
-import { departmentApi } from '../../services/departmentApi.js';
+import { departmentApi } from '../../services/departmentApi';
 import { employeeApi } from '../../services/employeeApi';
+import { fileApi } from '../../services/fileApi'; // Import the fileApi
 import userReducer from '../slices/UserSlice';
-// Import the factoryCreationReducer
 import factoryCreationReducer from '../slices/FactoryCreationSlice'; // Adjust the path as necessary
 
 export const store = configureStore({
@@ -13,8 +13,8 @@ export const store = configureStore({
     [factoryApi.reducerPath]: factoryApi.reducer,
     [departmentApi.reducerPath]: departmentApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
+    [fileApi.reducerPath]: fileApi.reducer, // Add the fileApi reducer
     user: userReducer,
-    // Add the new slice here
     factoryCreation: factoryCreationReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -22,5 +22,6 @@ export const store = configureStore({
       .concat(userApi.middleware)
       .concat(factoryApi.middleware)
       .concat(departmentApi.middleware)
-      .concat(employeeApi.middleware),
+      .concat(employeeApi.middleware)
+      .concat(fileApi.middleware), // Add the fileApi middleware
 });
