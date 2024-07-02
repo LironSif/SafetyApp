@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './Dashboard.css';
 import FactoryDa from '../../Pages/Factory/FactoryDa';
+import Chemicals from '../../Pages/Chemicals/Chemicals'; // Import the new Chemicals component
 import { useAuth } from '../../context/AuthContext';
 import { useGetFactoryByIdQuery } from '../../services/factoryApi';
 import Spinner3 from '../../components/Spinner/Spinner3';
@@ -32,7 +33,7 @@ const Dashboard = () => {
     <div className="dashboard">
       <Routes>
         <Route path="/factory" element={<FactoryDa factoryId={factoryId} />} />
-        {/* <Route path="/chemicals" element={<Chemicals />} /> */}
+        <Route path="/chemicals" element={<Chemicals factoryId={factoryId} />} />
         {/* Add more routes as needed */}
       </Routes>
     </div>

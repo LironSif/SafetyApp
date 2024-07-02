@@ -1,0 +1,108 @@
+.chemical-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .department-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 40px); /* Three cards per row */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    height: 80vh; /* Set height to 80vh */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+  
+  .department-card h3 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .department-card p {
+    margin: 5px 0;
+    color: #666;
+  }
+  
+  .department-card .total-chemicals {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .chemical-list {
+    margin-top: 10px;
+  }
+  
+  .chemical-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chemical-item p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .chemical-item p:first-child {
+    font-weight: bold;
+  }
+  
+  .chemical-item .quantity-controls {
+    display: flex;
+    gap: 5px;
+    margin: 5px 0;
+  }
+  
+  .chemical-item button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .chemical-item button:hover {
+    background-color: #0056b3;
+  }
+  
+  .chemical-item ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .chemical-item ul li {
+    background-color: #e9e9e9;
+    margin: 5px 0;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  
+  .chemical-item .state-liquid {
+    color: blue;
+  }
+  
+  .chemical-item .state-gas {
+    color: yellow;
+  }
+  
+  .chemical-item .state-solid {
+    color: green;
+  }
+  
+  .scroll-indicator {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #888;
+  }
+  

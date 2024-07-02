@@ -9,6 +9,7 @@ import Doco from "./Pages/setup-your-factory/Doco";
 import NavBar from './components/Nav/NavBar';
 import MobileNavBar from './components/Nav/MobileNavBar';
 import "./App.css";
+import Forms from "./Pages/Forms/Forms";
 
 const App = () => {
   const location = useLocation();
@@ -77,6 +78,8 @@ const App = () => {
           <Route path="/getting-started/setup" element={<SetupYourFactory />} />
           <Route path="/getting-started/documentation" element={<Doco />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
+          <Route path="/forms/*" element={<Forms />} />
+
           {/* Additional routes as needed */}
         </Routes>
       </div>

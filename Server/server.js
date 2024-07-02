@@ -14,6 +14,7 @@ import autaRoute from './routes/authRoutes.js';
 import factoryRoutes from './routes/factoryRoutes.js'; 
 import departmentRoutes from './routes/departmentRoutes.js'; 
 import employeeRoutes from './routes/employeeRoutes.js'; 
+import fileRoutes from './routes/fileRoutes.js'; 
 import ensureAuthenticated from './middleware/authentication/ensureAuthenticated.js';
 
 // Load environment variables from .env file for secure configuration
@@ -72,6 +73,7 @@ app.use(passport.session());
 
 // Routes configuration
 app.use("/auth", autaRoute);
+app.use('/api/files', fileRoutes);
 app.use('/api/factories', ensureAuthenticated, factoryRoutes);
 app.use('/api/departments', ensureAuthenticated, departmentRoutes);
 app.use('/api/employees', ensureAuthenticated, employeeRoutes);
