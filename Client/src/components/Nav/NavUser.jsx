@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo/techh.jpeg";
-import UserMenu from '../UserManu/UserMenu.jsx'; // Ensure the path is correct
+import UserMenu from '../UserManu/UserMenu.jsx'
 import './NavUser.css';
 
 const NavUser = () => {
-  const { user,refreshUserData } = useAuth();
+  const { user, refreshUserData } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,20 +14,18 @@ const NavUser = () => {
       localStorage.setItem('factoryId', user.factory || '');
     }
   }, [user]);
-  
+
   const avatarSrc = user?.avatar || logo;
   let userName = user?.email || 'Welcome, Guest!';
-// if(user?){
-//   localStorage.setItem('factoryId', user?.factory || '');
-// }
+
   if (userName.length > 15) {
     userName = `${userName.substring(0, 15)}...`;
   }
 
   return (
-    <div className='Navuser'>
+    <div className='NavUser'>
       <div className='user-profile'>
-        <img src={avatarSrc} onClick={() => navigate("/")} alt="User Avatar" className='avatar'/>
+        <img src={avatarSrc} onClick={() => navigate("/")} alt="User Avatar" className='avatar' />
         <div onClick={() => navigate("/")} className='username'>{userName}</div>
         <UserMenu />
       </div>
