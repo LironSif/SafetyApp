@@ -84,7 +84,13 @@ const Chemicals = ({ factoryId }) => {
     console.log(`Chemical ID: ${chemicalId}, Change: ${change}`);
   };
 
-  return <div>{renderContent()}</div>;
+  return (
+    <div className="chemicals-container">
+      <h1>Factory Chemicals</h1>
+      <p>Total Departments: {departments ? departments.length : 0}</p>
+      {renderContent()}
+    </div>
+  );
 };
 
 export default Chemicals;
