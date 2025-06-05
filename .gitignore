@@ -1,0 +1,13 @@
+# Node modules and dist directories
+**/node_modules/
+**/dist/
+**/logs/
+*.log
+
+# Local environment files
+**/.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
