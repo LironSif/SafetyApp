@@ -10,7 +10,7 @@ import MongoStore from 'connect-mongo'; // Added for MongoDB session storage
 
 // Import custom middleware and routes
 import "./middleware/authentication/passportConfig.js"; 
-import autaRoute from './routes/authRoutes.js'; 
+import authRoutes from './routes/authRoutes.js';
 import factoryRoutes from './routes/factoryRoutes.js'; 
 import departmentRoutes from './routes/departmentRoutes.js'; 
 import employeeRoutes from './routes/employeeRoutes.js'; 
@@ -72,7 +72,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes configuration
-app.use("/auth", autaRoute);
+app.use("/auth", authRoutes);
 app.use('/api/files', fileRoutes);
 app.use('/api/factories', ensureAuthenticated, factoryRoutes);
 app.use('/api/departments', ensureAuthenticated, departmentRoutes);
