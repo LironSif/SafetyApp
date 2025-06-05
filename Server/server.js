@@ -58,7 +58,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Configure session middleware to use MongoDB for storage
 app.use(session({
-  secret: process.env.SESSION_SECERT,
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
