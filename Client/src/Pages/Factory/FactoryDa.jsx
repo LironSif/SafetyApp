@@ -2,7 +2,7 @@ import React from 'react';
 import { useGetDepartmentsByFactoryIdQuery } from '../../services/departmentApi';
 import { useAuth } from '../../context/AuthContext';
 import YouMustLogin from '../../components/YouMustLogin/YouMustLogin.jsx';
-import Spinner4 from '../../components/Spinner/Spinner3.jsx';
+import Spinner4 from '../../components/Spinner/Spinner4.jsx';
 import './FactoryDa.css';
 import { format, addYears, isValid } from 'date-fns';
 

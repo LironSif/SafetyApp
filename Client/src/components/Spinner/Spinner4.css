@@ -1,4 +1,4 @@
-.spinner3-container {
+.spinner4-container {
     position: relative;
     width: 200px; /* Container size */
     height: 200px;
@@ -7,9 +7,7 @@
     align-items: center;
     margin: auto;
     bottom: -10%;
-  }
-  
-  .spinner3-item {
+.spinner4-item {
     position: absolute;
     width: 50px; /* Based on your image sizes */
     height: 50px;
@@ -31,26 +29,26 @@
     }
   }
   
-  .spinner3-hut {
+  .spinner4-hut {
     animation: rotate-around 6s linear infinite, scale-change-hut 4s ease-in-out infinite alternate;
     left: 50%; /* Centralize before rotation */
     transform-origin: center bottom;
   }
   
   
-  .spinner3-goggles {
+  .spinner4-goggles {
     animation: rotate-around 6s linear infinite, scale-change 4s ease-in-out infinite alternate;
     left: 30%; /* Adjust for visual spacing */
     transform-origin: center bottom;
   }
   
-  .spinner3-hammer {
+  .spinner4-hammer {
     animation: rotate-around 6s linear infinite, scale-change 5s ease-in-out infinite alternate;
     right: 30%; /* Adjust for visual spacing */
     transform-origin: center bottom;
   }
   
-  .spinner3-worker {
+  .spinner4-worker {
     position: absolute;
     width: 100px; /* Adjust based on actual image size */
     height: 100px;
@@ -89,4 +87,4 @@
     }
   }
   
-  
+ 

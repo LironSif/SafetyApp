@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import SetupFactory from "../../components/FactorySetup/SetupFactory.jsx";
 import YouMustLogin from "../../components/YouMustLogin/YouMustLogin.jsx";
 import { useAuth } from "../../context/AuthContext";
-import Spinner4 from "../../components/Spinner/Spinner3.jsx";
+import Spinner4 from "../../components/Spinner/Spinner4.jsx";
 
 const SetupYourFactory = () => {
   const { user, refreshUserData, isLoading } = useAuth();
