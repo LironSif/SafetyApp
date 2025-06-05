@@ -7,7 +7,7 @@ import {
   deleteDepartment,
   getAllDepartmentsByFactoryId,
   updateDepartments
-} from '../controllers/departmentController.js'; // Assuming factoryController2.js is meant for departments
+} from '../controllers/departmentController.js'; // Department controller functions
 
 const router = express.Router();
 
