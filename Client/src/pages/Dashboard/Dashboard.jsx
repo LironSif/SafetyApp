@@ -1,18 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import './Home.css';
-import HeroSection from '../../components/Hero/HeroSection.jsx';
+import { Route, Routes } from 'react-router-dom';
+import './Dashboard.css';
+import FactoryDa from '../../pages/Factory/FactoryDa';
+import Chemicals from '../../pages/Chemicals/Chemicals'; // Import the new Chemicals component
 import { useAuth } from '../../context/AuthContext';
-import QuickSetup from '../../components/FactorySetup/QuickSetup.jsx';
 import { useGetFactoryByIdQuery } from '../../services/factoryApi';
-import { setQuickSetupComplete } from '../../redux/slices/FactoryCreationSlice';
-import Spinner3 from '../../components/Spinner/Spinner3.jsx';
+import Spinner3 from '../../components/Spinner/Spinner3';
 
-const Home = () => {
+const Dashboard = () => {
   const { user, isLoading: isLoadingUser } = useAuth();
   const dispatch = useDispatch();
 
-  // useEffect to store user._id into localStorage
   useEffect(() => {
     if (user && user._id) {
       localStorage.setItem('userID', user._id);
@@ -26,23 +25,19 @@ const Home = () => {
     skip: !factoryId,
   });
 
-  useEffect(() => {
-    if (isFactorySuccess) {
-      const setupComplete = !!factory;
-      dispatch(setQuickSetupComplete(setupComplete));
-    }
-  }, [factory, isFactorySuccess, dispatch]);
-
   if (isFactoryLoading || isLoadingUser) {
     return <Spinner3 />;
   }
-console.log(!factory )
+
   return (
-    <div className='home'>
-      <HeroSection />
-      {!factory && <QuickSetup />}
+    <div className="dashboard">
+      <Routes>
+        <Route path="/factory" element={<FactoryDa factoryId={factoryId} />} />
+        <Route path="/chemicals" element={<Chemicals factoryId={factoryId} />} />
+        {/* Add more routes as needed */}
+      </Routes>
     </div>
   );
 };
 
-export default Home;
+export default Dashboard;

@@ -4,7 +4,7 @@ import YouMustLogin from "../../components/YouMustLogin/YouMustLogin.jsx";
 import { useAuth } from "../../context/AuthContext";
 import Spinner4 from "../../components/Spinner/Spinner3.jsx";
 
-const SetupYourFactory = () => {
+const SetupFactoryPage = () => {
   const { user, refreshUserData, isLoading } = useAuth();
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const SetupYourFactory = () => {
   return <div>{renderContent()}</div>;
 };
 
-export default SetupYourFactory;
+export default SetupFactoryPage;

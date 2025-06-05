@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Home from "./Pages/Home/Home";
-import Login from "./Pages/Login/Login";
-import SignUp from "./Pages/SignUp/SignUp";
-import Dashboard from "./Pages/Dashboard/Dashboard";
-import SetupYourFactory from "./Pages/setup-your-factory/setup-your-factory";
-import Doco from "./Pages/setup-your-factory/Doco";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import SetupFactoryPage from "./pages/SetupFactory/SetupFactory";
+import Doco from "./pages/SetupFactory/Doco";
 import NavBar from './components/Nav/NavBar';
 import MobileNavBar from './components/Nav/MobileNavBar';
 import "./App.css";
-import Forms from "./Pages/Forms/Forms";
+import Forms from "./pages/Forms/Forms";
 
 const App = () => {
   const location = useLocation();
@@ -75,7 +75,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/getting-started/setup" element={<SetupYourFactory />} />
+          <Route path="/getting-started/setup" element={<SetupFactoryPage />} />
           <Route path="/getting-started/documentation" element={<Doco />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/forms/*" element={<Forms />} />

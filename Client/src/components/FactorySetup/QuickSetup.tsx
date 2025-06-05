@@ -8,6 +8,7 @@ import Modal from "../modals/setupModal.jsx";
 import "./QuickSetup.css";
 import MessageWithTypingEffect from "../TypeEffect/TypeEffect.jsx";
 import welcomeMessage from "../TypeEffect/Message2.js";
+import { useFactorySetup } from "../../hooks/useFactorySetup";
 
 const QuickSetup = () => {
   const navigate = useNavigate();
@@ -16,8 +17,12 @@ const QuickSetup = () => {
   const [createFactory, { isLoading: isCreatingFactory, isSuccess: isFactorySuccess, data: factoryData, error: factoryError }] = useCreateFactoryMutation();
   const [createDepartment, { isLoading: isCreatingDepartment, isSuccess: isDepartmentSuccess, error: departmentError }] = useCreateDepartmentMutation();
 
-  const [factoryDetails, setFactoryDetails] = useState({ factoryName: "", factoryAddress: "" });
-  const [selectedDepartments, setSelectedDepartments] = useState([]);
+  const {
+    factoryDetails,
+    setFactoryDetails,
+    departments,
+    setDepartments,
+  } = useFactorySetup(user?._id);
   const [showModal, setShowModal] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [factoryErrorMessage, setFactoryErrorMessage] = useState("");
@@ -53,11 +58,11 @@ const QuickSetup = () => {
   };
 
   const handleSelectDepartment = (dept) => {
-    setSelectedDepartments(prev => prev.includes(dept) ? prev : [...prev, dept]);
+    setDepartments(prev => (prev.includes(dept) ? prev : [...prev, dept]));
   };
 
   const handleRemoveDepartment = (dept) => {
-    setSelectedDepartments(prev => prev.filter(d => d !== dept));
+    setDepartments(prev => prev.filter(d => d !== dept));
   };
 
   const validateFactoryDetails = () => {
@@ -91,7 +96,7 @@ const QuickSetup = () => {
     setDepartmentErrorMessage("");
     setShowSpinner(true);
     const factoryId = localStorage.getItem("factoryId");
-    if (!factoryId || selectedDepartments.length === 0) {
+    if (!factoryId || departments.length === 0) {
       setShowSpinner(false);
       setDepartmentErrorMessage("No departments selected or missing factory ID.");
       return;
@@ -100,7 +105,7 @@ const QuickSetup = () => {
       await createDepartment({
         factoryId,
         userId: user._id,
-        departments: selectedDepartments,
+        departments: departments,
       });
     } finally {
       setShowSpinner(false);
@@ -155,14 +160,14 @@ const QuickSetup = () => {
           <div className="department-selection">
             {preExistingDepartments.map((dept, index) => (
               <button key={index} onClick={() => handleSelectDepartment(dept)}
-                      className={`department-btn ${selectedDepartments.includes(dept) ? "selected" : ""}`}>
+                      className={`department-btn ${departments.includes(dept) ? "selected" : ""}`}>
                 {dept}
               </button>
             ))}
           </div>
           <label className="added-departments">Selected Departments</label>
           <div className="selected-departments">
-            {selectedDepartments.map(dept => (
+            {departments.map(dept => (
               <div key={dept} className="selected-department">
                 {dept} <button className="remove-btn" onClick={() => handleRemoveDepartment(dept)}>X</button>
               </div>
